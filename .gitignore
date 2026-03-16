@@ -9,6 +9,9 @@ dist/
 build/
 *.whl
 
+# Auto-generated version file (hatch-vcs)
+src/universal_json_agent_mcp/_version.py
+
 # Virtual environments
 .venv/
 venv/

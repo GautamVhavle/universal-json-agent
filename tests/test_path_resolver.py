@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from json_agent.utils.path_resolver import resolve_path, _tokenize
+from universal_json_agent_mcp.utils.path_resolver import resolve_path, _tokenize
 
 
 class TestResolvePathBasic:

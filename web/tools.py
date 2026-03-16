@@ -13,8 +13,8 @@ from typing import Any, Optional
 from langchain_core.tools import StructuredTool
 from pydantic import BaseModel, Field
 
-from json_agent.store import JSONStore
-from json_agent.tools import (
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools import (
     load as load_mod,
     explore as explore_mod,
     query as query_mod,

@@ -14,7 +14,7 @@ from typing import Any
 from jsonpath_ng.ext import parse as jsonpath_parse
 from jsonpath_ng.exceptions import JsonPathParserError
 
-from json_agent.store import JSONStore
+from universal_json_agent_mcp.store import JSONStore
 
 
 def describe(store: JSONStore, alias: str, expression: str) -> str:

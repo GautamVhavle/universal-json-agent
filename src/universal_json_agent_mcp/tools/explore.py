@@ -10,9 +10,9 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from json_agent.store import JSONStore
-from json_agent.utils.path_resolver import resolve_path
-from json_agent.utils.truncation import truncate_value
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.utils.truncation import truncate_value
 
 
 def get_keys(store: JSONStore, alias: str, path: str = "") -> str:

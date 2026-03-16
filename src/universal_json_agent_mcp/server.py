@@ -13,16 +13,16 @@ import sys
 
 from mcp.server.fastmcp import FastMCP
 
-from json_agent.store import JSONStore
-from json_agent.tools import load as load_tools
-from json_agent.tools import explore as explore_tools
-from json_agent.tools import query as query_tools
-from json_agent.tools import aggregate as aggregate_tools
-from json_agent.tools import transform as transform_tools
-from json_agent.tools import stats as stats_tools
-from json_agent.tools import advanced_query as adv_query_tools
-from json_agent.tools import export as export_tools
-from json_agent.tools import introspect as introspect_tools
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools import load as load_tools
+from universal_json_agent_mcp.tools import explore as explore_tools
+from universal_json_agent_mcp.tools import query as query_tools
+from universal_json_agent_mcp.tools import aggregate as aggregate_tools
+from universal_json_agent_mcp.tools import transform as transform_tools
+from universal_json_agent_mcp.tools import stats as stats_tools
+from universal_json_agent_mcp.tools import advanced_query as adv_query_tools
+from universal_json_agent_mcp.tools import export as export_tools
+from universal_json_agent_mcp.tools import introspect as introspect_tools
 
 # ---------------------------------------------------------------------------
 # Logging — all output goes to stderr so stdout stays clean for JSON-RPC
@@ -46,7 +46,7 @@ store = JSONStore()
 # ---------------------------------------------------------------------------
 
 mcp = FastMCP(
-    "json-agent",
+    "universal-json-agent",
     instructions=(
         "Advanced JSON parsing agent. Load any JSON file and query its "
         "structure, values, keys, counts, and more."

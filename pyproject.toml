@@ -1,9 +1,24 @@
 [project]
-name = "json-agent"
-version = "0.1.0"
-description = "MCP server exposing advanced JSON parsing tools for GitHub Copilot in VS Code"
+name = "universal-json-agent-mcp"
+dynamic = ["version"]
+description = "MCP server for advanced JSON parsing — load, query, aggregate, transform any JSON file from GitHub Copilot, Claude, Cursor, or any MCP client."
 readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Gautam Vhavle" },
+]
+keywords = ["mcp", "json", "copilot", "agent", "parsing", "jsonpath"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Intended Audience :: Developers",
+]
 dependencies = [
     "mcp[cli]>=1.0.0",
     "pydantic>=2.0.0",
@@ -17,12 +32,29 @@ dev = [
     "pytest-asyncio>=0.23.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/GautamVhavle/universal-json-agent"
+Repository = "https://github.com/GautamVhavle/universal-json-agent"
+Issues = "https://github.com/GautamVhavle/universal-json-agent/issues"
+
+[project.scripts]
+universal-json-agent-mcp = "universal_json_agent_mcp.server:main"
+
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/universal_json_agent_mcp/_version.py"
+
 [tool.hatch.build.targets.wheel]
-packages = ["src/json_agent"]
+packages = ["src/universal_json_agent_mcp"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

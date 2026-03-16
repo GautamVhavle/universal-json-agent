@@ -14,8 +14,8 @@ import json
 import os
 from typing import Any
 
-from json_agent.store import JSONStore
-from json_agent.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.path_resolver import resolve_path
 
 
 def export_csv(

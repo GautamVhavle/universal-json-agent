@@ -8,8 +8,8 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.explore import get_keys, get_value, get_type, get_structure
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.explore import get_keys, get_value, get_type, get_structure
 
 
 # ------------------------------------------------------------------

@@ -13,9 +13,9 @@ from typing import Any
 from jsonpath_ng.ext import parse as jsonpath_parse
 from jsonpath_ng.exceptions import JsonPathParserError
 
-from json_agent.store import JSONStore
-from json_agent.utils.path_resolver import resolve_path
-from json_agent.utils.truncation import truncate_list, truncate_value
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
 
 def jsonpath_query(store: JSONStore, alias: str, expression: str) -> str:

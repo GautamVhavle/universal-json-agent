@@ -8,8 +8,8 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.aggregate import count, sum_values, min_max, unique_values, value_counts
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.aggregate import count, sum_values, min_max, unique_values, value_counts
 
 
 # ------------------------------------------------------------------

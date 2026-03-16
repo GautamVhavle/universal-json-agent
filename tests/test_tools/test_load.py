@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.load import load_json, list_loaded, unload_json
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.load import load_json, list_loaded, unload_json
 
 
 class TestLoadJson:

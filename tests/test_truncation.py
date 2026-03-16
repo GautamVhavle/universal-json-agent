@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from json_agent.utils.truncation import truncate_value, truncate_list, _serialize
+from universal_json_agent_mcp.utils.truncation import truncate_value, truncate_list, _serialize
 
 
 class TestTruncateValue:

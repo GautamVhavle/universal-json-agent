@@ -1,6 +1,6 @@
 {
   "servers": {
-    "json-agent": {
+    "universal-json-agent": {
       "type": "stdio",
       "command": "uv",
       "args": [
@@ -9,7 +9,7 @@
         "run",
         "python",
         "-m",
-        "json_agent.server"
+        "universal_json_agent_mcp"
       ]
     }
   }

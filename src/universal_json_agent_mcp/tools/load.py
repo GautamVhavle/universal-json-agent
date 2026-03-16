@@ -7,7 +7,7 @@ contain pure business logic and return plain strings (tool responses).
 
 from __future__ import annotations
 
-from json_agent.store import JSONStore
+from universal_json_agent_mcp.store import JSONStore
 
 
 def load_json(store: JSONStore, file_path: str, alias: str | None = None) -> str:

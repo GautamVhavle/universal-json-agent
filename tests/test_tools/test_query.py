@@ -8,8 +8,8 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.query import jsonpath_query, filter_objects, search_text
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.query import jsonpath_query, filter_objects, search_text
 
 
 # ------------------------------------------------------------------

@@ -8,8 +8,8 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.transform import flatten, pick_fields, group_by, sort_by, sample
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.transform import flatten, pick_fields, group_by, sort_by, sample
 
 
 # ------------------------------------------------------------------

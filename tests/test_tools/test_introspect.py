@@ -8,8 +8,8 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.introspect import distinct_paths
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.introspect import distinct_paths
 
 
 def _load_data(store: JSONStore, data, alias: str = "d") -> JSONStore:

@@ -15,7 +15,7 @@ import tempfile
 
 import pytest
 
-from json_agent import server
+from universal_json_agent_mcp import server
 
 
 # ------------------------------------------------------------------

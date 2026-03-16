@@ -9,8 +9,8 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore
-from json_agent.tools.export import export_csv, export_json
+from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.tools.export import export_csv, export_json
 
 
 def _load_data(store: JSONStore, data, alias: str = "d") -> JSONStore:
@@ -237,15 +237,15 @@ class TestExportJson:
 
 class TestExportHumanize:
     def test_humanize_integer_bytes(self) -> None:
-        from json_agent.tools.export import _humanize
+        from universal_json_agent_mcp.tools.export import _humanize
         assert _humanize(512) == "512 B"
 
     def test_humanize_float_kb(self) -> None:
-        from json_agent.tools.export import _humanize
+        from universal_json_agent_mcp.tools.export import _humanize
         result = _humanize(1500)
         assert "KB" in result
 
     def test_humanize_terabytes(self) -> None:
-        from json_agent.tools.export import _humanize
+        from universal_json_agent_mcp.tools.export import _humanize
         result = _humanize(2 * 1024 ** 4)
         assert "TB" in result

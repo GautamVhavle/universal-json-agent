@@ -20,7 +20,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.prebuilt import create_react_agent
 
-from json_agent.store import JSONStore
+from universal_json_agent_mcp.store import JSONStore
 from web.config import settings
 from web.tools import build_tools
 

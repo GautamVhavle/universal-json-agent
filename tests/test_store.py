@@ -8,7 +8,7 @@ import tempfile
 
 import pytest
 
-from json_agent.store import JSONStore, DocumentMeta
+from universal_json_agent_mcp.store import JSONStore, DocumentMeta
 
 
 class TestLoad:
