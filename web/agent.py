@@ -1,8 +1,15 @@
 """
 LangChain Agent — autonomous JSON analysis powered by an LLM.
 
-Creates a ReAct-style agent backed by OpenRouter that can pick and chain
-any combination of the 26 JSON tools to answer a user question.
+Creates a ReAct-style agent that can pick and chain any combination of the
+26 JSON tools to answer a user question.
+
+Provider compatibility:
+        - This agent layer is LangChain-native and provider-agnostic.
+        - It works with any LangChain chat model integration (OpenAI,
+            Anthropic/Claude, Azure OpenAI, OpenRouter, etc.).
+        - This project currently wires the default client via OpenRouter using
+            `langchain_openai.ChatOpenAI` and an OpenAI-compatible base URL.
 
 Architecture:
     - The LLM client is created once and reused (expensive to init).
@@ -42,21 +49,38 @@ let you load, explore, query, aggregate, transform, and export JSON documents.
 tool calls as needed.
 5. When you have the answer, respond with a clear, concise summary.
 
+## Critical: Use Bulk Extraction — NEVER Iterate One-by-One
+- When you need data from every item in an array, use a SINGLE `jsonpath_query` \
+call with a wildcard expression like `$.missions[*].name` instead of looping \
+through indices one at a time.
+- Use `pick_fields` to extract multiple fields from every object in one call.
+- Use `filter_objects` to select items matching a condition in one call.
+- NEVER call `get_value` in a loop for each array index — this wastes tool \
+calls and is extremely slow. Always prefer bulk tools.
+
 ## Rules
 - Always load the file before doing anything else.
 - Prefer specific tools over brute-force (e.g. use `filter_objects` instead \
 of fetching everything and filtering manually).
+- Use `jsonpath_query` with wildcards (`[*]`, `..`) for bulk extraction.
+- Use `pick_fields` to grab specific fields from every object at a path.
 - Use `search_text` when you need to find where a value lives.
-- Use `jsonpath_query` for precise extraction.
 - Use `describe` / `sum_values` / `min_max` / `value_counts` for analytics.
 - If a tool returns an error, try an alternative approach.
 - Keep your final answer focused — answer exactly what was asked.
+- Aim to finish in as few tool calls as possible (typically 3-6).
 """
 
 
 def create_llm() -> ChatOpenAI:
     """
-    Create the shared LLM client (reused across requests).
+        Create the shared LLM client (reused across requests).
+
+        Notes:
+                - Default wiring uses OpenRouter through an OpenAI-compatible endpoint.
+                - You can swap this with any LangChain chat model class (for example,
+                    OpenAI, Claude, or Azure OpenAI integrations) without changing the
+                    rest of the agent flow.
 
     Raises:
         ValueError: If OPENROUTER_API_KEY is not set.

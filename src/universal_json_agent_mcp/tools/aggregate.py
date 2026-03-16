@@ -11,10 +11,8 @@ import json
 from collections import Counter
 from typing import Any
 
-from jsonpath_ng.ext import parse as jsonpath_parse
-from jsonpath_ng.exceptions import JsonPathParserError
-
 from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.jsonpath_helpers import extract_numbers, extract_values
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_value, truncate_list
 
@@ -54,7 +52,7 @@ def sum_values(store: JSONStore, alias: str, expression: str) -> str:
     Returns:
         The sum and count of matched numeric values.
     """
-    nums = _extract_numbers(store, alias, expression)
+    nums = extract_numbers(store, alias, expression)
 
     if not nums:
         return f"No numeric values found for: {expression}"
@@ -75,7 +73,7 @@ def min_max(store: JSONStore, alias: str, expression: str) -> str:
     Returns:
         The min, max, and count of matched numeric values.
     """
-    nums = _extract_numbers(store, alias, expression)
+    nums = extract_numbers(store, alias, expression)
 
     if not nums:
         return f"No numeric values found for: {expression}"
@@ -95,7 +93,7 @@ def unique_values(store: JSONStore, alias: str, expression: str) -> str:
     Returns:
         A list of distinct values and their count.
     """
-    values = _extract_values(store, alias, expression)
+    values = extract_values(store, alias, expression)
 
     if not values:
         return f"No values found for: {expression}"
@@ -130,7 +128,7 @@ def value_counts(store: JSONStore, alias: str, expression: str) -> str:
     Returns:
         A frequency table showing each value and its count, sorted descending.
     """
-    values = _extract_values(store, alias, expression)
+    values = extract_values(store, alias, expression)
 
     if not values:
         return f"No values found for: {expression}"
@@ -152,25 +150,3 @@ def value_counts(store: JSONStore, alias: str, expression: str) -> str:
 
     lines.append(f"\nTotal: {len(values)} values, {len(counter)} unique")
     return "\n".join(lines)
-
-
-# ------------------------------------------------------------------
-# Private helpers
-# ------------------------------------------------------------------
-
-
-def _extract_values(store: JSONStore, alias: str, expression: str) -> list[Any]:
-    """Run a JSONPath expression and return all matched values."""
-    data = store.get(alias)
-    try:
-        jp = jsonpath_parse(expression)
-    except (JsonPathParserError, Exception) as exc:
-        raise ValueError(f"Invalid JSONPath expression '{expression}': {exc}")
-
-    return [match.value for match in jp.find(data)]
-
-
-def _extract_numbers(store: JSONStore, alias: str, expression: str) -> list[int | float]:
-    """Run a JSONPath expression and return only numeric matches."""
-    values = _extract_values(store, alias, expression)
-    return [v for v in values if isinstance(v, (int, float)) and not isinstance(v, bool)]

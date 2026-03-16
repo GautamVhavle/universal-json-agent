@@ -11,6 +11,7 @@ import json
 from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.json_types import json_type_name
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_value
 
@@ -74,7 +75,7 @@ def get_type(store: JSONStore, alias: str, path: str = "") -> str:
     """
     data = store.get(alias)
     target = resolve_path(data, path)
-    type_name = _json_type(target)
+    type_name = json_type_name(target)
 
     # Add count info for containers
     if isinstance(target, dict):
@@ -116,23 +117,6 @@ def get_structure(
 # ------------------------------------------------------------------
 
 
-def _json_type(value: Any) -> str:
-    """Map a Python value to a JSON type name."""
-    if isinstance(value, dict):
-        return "object"
-    if isinstance(value, list):
-        return "array"
-    if isinstance(value, str):
-        return "string"
-    if isinstance(value, bool):
-        return "boolean"
-    if isinstance(value, (int, float)):
-        return "number"
-    if value is None:
-        return "null"
-    return "unknown"
-
-
 def _build_structure(value: Any, *, depth: int, max_depth: int, indent: int = 0) -> str:
     """
     Recursively build a type-skeleton string.
@@ -146,7 +130,7 @@ def _build_structure(value: Any, *, depth: int, max_depth: int, indent: int = 0)
             city: string
     """
     prefix = "  " * indent
-    type_name = _json_type(value)
+    type_name = json_type_name(value)
 
     if isinstance(value, dict):
         header = f"{type_name} ({len(value)} keys)"

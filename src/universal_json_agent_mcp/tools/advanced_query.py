@@ -12,26 +12,11 @@ import re
 from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, VALID_OPERATOR_NAMES
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
 
-# ------------------------------------------------------------------
-# Operator dispatch (reused from query.py pattern)
-# ------------------------------------------------------------------
-
-_OPERATORS: dict[str, Any] = {
-    "eq": lambda a, b: a == b,
-    "neq": lambda a, b: a != b,
-    "gt": lambda a, b: a > b,
-    "gte": lambda a, b: a >= b,
-    "lt": lambda a, b: a < b,
-    "lte": lambda a, b: a <= b,
-    "contains": lambda a, b: isinstance(a, str) and isinstance(b, str) and b in a,
-    "regex": lambda a, b: isinstance(a, str) and isinstance(b, str) and bool(re.search(b, a)),
-}
-
-_VALID_OPS = set(_OPERATORS.keys())
 _VALID_MODES = {"and", "or"}
 
 
@@ -78,12 +63,12 @@ def multi_filter(
             if key not in cond:
                 raise ValueError(f"Condition {i} missing required key '{key}'.")
         op = cond["operator"]
-        if op not in _VALID_OPS:
+        if op not in VALID_OPERATOR_NAMES:
             raise ValueError(
                 f"Condition {i}: unknown operator '{op}'. "
-                f"Valid: {', '.join(sorted(_VALID_OPS))}"
+                f"Valid: {', '.join(sorted(VALID_OPERATOR_NAMES))}"
             )
-        parsed_conditions.append((cond["field"], _OPERATORS[op], cond["value"]))
+        parsed_conditions.append((cond["field"], FILTER_OPERATORS[op], cond["value"]))
 
     data = store.get(alias)
     target = resolve_path(data, path)

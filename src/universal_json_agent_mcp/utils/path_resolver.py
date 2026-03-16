@@ -10,6 +10,7 @@ Supports:
 
 from __future__ import annotations
 
+from functools import lru_cache
 import re
 from typing import Any
 
@@ -65,7 +66,18 @@ def resolve_path(data: Any, path: str) -> Any:
     return current
 
 
-def _tokenize(path: str) -> list[str]:
+def _tokenize(path: str) -> tuple[str, ...]:
+    """
+    Split a path string into individual segments.
+
+    "users[0].name"  → ["users", "0", "name"]
+    "data.items.2"   → ["data", "items", "2"]
+    """
+    return list(_tokenize_cached(path))
+
+
+@lru_cache(maxsize=1024)
+def _tokenize_cached(path: str) -> tuple[str, ...]:
     """
     Split a path string into individual segments.
 
@@ -75,4 +87,4 @@ def _tokenize(path: str) -> list[str]:
     # Replace bracket notation with dot notation: "a[0].b" → "a.0.b"
     normalized = _BRACKET_INDEX_RE.sub(r".\1", path)
     # Strip leading/trailing dots, split, and drop empties
-    return [seg for seg in normalized.strip(".").split(".") if seg]
+    return tuple(seg for seg in normalized.strip(".").split(".") if seg)

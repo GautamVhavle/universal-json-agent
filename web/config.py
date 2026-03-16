@@ -28,7 +28,7 @@ class Settings:
             "OPENROUTER_MODEL", "openai/gpt-4o-mini"
         )
     )
-    max_iterations: int = 25       # max agent tool-call loops
+    max_iterations: int = 75       # max agent tool-call loops
     upload_dir: str = "/tmp/json_agent_uploads"
 
 

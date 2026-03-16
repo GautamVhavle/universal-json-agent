@@ -1,715 +1,1029 @@
 {
-  "database_meta": {
-    "version": "14.2.0",
-    "last_updated": "2026-03-16T20:15:14Z",
-    "classification": "RESTRICTED",
-    "main_node": "Sector-7G",
-    "total_missions": 7,
-    "active_personnel": 24,
-    "budget_cycle": "FY2026-FY2029",
-    "contact": {
-      "director": "Admiral Yuki Tanaka",
-      "email": "ops@sector7g.gov",
-      "hotline": "+1-800-STELLAR"
+    "database_meta": {
+        "version": "14.2.0",
+        "last_updated": "2026-03-16T20:15:14Z",
+        "classification": "RESTRICTED",
+        "main_node": "Sector-7G",
+        "total_missions": 7,
+        "active_personnel": 24,
+        "budget_cycle": "FY2026-FY2029",
+        "contact": {
+            "director": "Admiral Yuki Tanaka",
+            "email": "ops@sector7g.gov",
+            "hotline": "+1-800-STELLAR"
+        }
+    },
+    "missions": [
+        {
+            "mission_id": "MSN-9901-ALPHA",
+            "codename": "Stellar Vanguard",
+            "status": "in_progress",
+            "is_classified": false,
+            "budget_credits": 4500000000.5,
+            "priority_level": 1,
+            "tags": [
+                "deep-space",
+                "exploration",
+                "crewed"
+            ],
+            "launch_details": {
+                "facility": "Cape Canaveral Space Force Station",
+                "pad": "LC-39A",
+                "window": {
+                    "open": "2026-04-12T08:00:00Z",
+                    "close": "2026-04-14T20:00:00Z"
+                },
+                "weather_at_launch": {
+                    "condition": "clear",
+                    "wind_speed_kmh": 12.4,
+                    "temperature_celsius": 24.1,
+                    "precipitation_probability": 0.05
+                }
+            },
+            "spacecraft": {
+                "designation": "Vanguard-1",
+                "type": "Deep Space Explorer",
+                "manufacturer": "AeroSpace Dynamics",
+                "serial_number": "ASD-2024-001",
+                "specifications": {
+                    "dry_mass_kg": 24500,
+                    "fuel_capacity_kg": 105000,
+                    "engine_type": "Ion-Plasma Drive",
+                    "max_thrust_kn": 1500,
+                    "life_support_days": 180,
+                    "radiation_shielding_mm": 35,
+                    "solar_panel_area_m2": 220
+                }
+            },
+            "personnel": {
+                "commander": {
+                    "name": "Elena Rostova",
+                    "age": 42,
+                    "species": "Human",
+                    "nationality": "Russian",
+                    "certifications": [
+                        "Piloting",
+                        "EVA",
+                        "Astrophysics",
+                        "Emergency Medicine"
+                    ],
+                    "previous_missions": 4,
+                    "contact_next_of_kin": "Andrei Rostov (+7-495-0000)"
+                },
+                "crew": [
+                    {
+                        "role": "Flight Engineer",
+                        "name": "Marcus Vance",
+                        "age": 35,
+                        "nationality": "American",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Systems Maintenance",
+                            "Propulsion Monitoring"
+                        ],
+                        "specialization": "Mechanical Engineering"
+                    },
+                    {
+                        "role": "Payload Specialist",
+                        "name": "Dr. Aris Thorne",
+                        "age": 50,
+                        "nationality": "British",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Biological Experiments",
+                            "Sample Collection"
+                        ],
+                        "specialization": "Xenobiology"
+                    },
+                    {
+                        "role": "Communications Officer",
+                        "name": "Priya Mehta",
+                        "age": 31,
+                        "nationality": "Indian",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Signal Relay",
+                            "Data Encryption",
+                            "Ground Comms"
+                        ],
+                        "specialization": "Quantum Cryptography"
+                    }
+                ]
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-001",
+                    "description": "Quantum Stabilizer Core",
+                    "weight_kg": 450.5,
+                    "is_hazardous": true,
+                    "hazard_class": "Class-IV Radiation",
+                    "storage_requirements": {
+                        "min_temp_c": -50,
+                        "max_temp_c": -10,
+                        "pressurized": true
+                    }
+                },
+                {
+                    "item_id": "PL-002",
+                    "description": "Hydroponic Seed Vault",
+                    "weight_kg": 120,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": 5,
+                        "max_temp_c": 25,
+                        "pressurized": true
+                    }
+                },
+                {
+                    "item_id": "PL-006",
+                    "description": "Autonomous Drone Swarm (x12)",
+                    "weight_kg": 340,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -20,
+                        "max_temp_c": 50,
+                        "pressurized": false
+                    }
+                }
+            ],
+            "telemetry_log": [
+                {
+                    "timestamp": "T+00:01:00",
+                    "velocity_kms": 1.2,
+                    "altitude_km": 15.4,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+00:05:00",
+                    "velocity_kms": 4.5,
+                    "altitude_km": 85.2,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+00:15:00",
+                    "velocity_kms": 7.8,
+                    "altitude_km": 400.1,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+01:00:00",
+                    "velocity_kms": 11.2,
+                    "altitude_km": 384400,
+                    "systems_nominal": false,
+                    "error_code": "WARN_O2_PRESSURE"
+                },
+                {
+                    "timestamp": "T+02:30:00",
+                    "velocity_kms": 15.6,
+                    "altitude_km": 820000,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+24:00:00",
+                    "velocity_kms": 22.1,
+                    "altitude_km": 4500000,
+                    "systems_nominal": true
+                }
+            ],
+            "mission_notes": null,
+            "risk_assessment": {
+                "overall_risk": "MEDIUM",
+                "identified_risks": [
+                    {
+                        "id": "R-01",
+                        "category": "Technical",
+                        "description": "Ion drive thermal overload at max thrust",
+                        "probability": 0.08,
+                        "impact": "HIGH",
+                        "mitigation": "Throttle cap at 85%"
+                    },
+                    {
+                        "id": "R-02",
+                        "category": "Medical",
+                        "description": "Crew radiation exposure beyond 180 days",
+                        "probability": 0.12,
+                        "impact": "MEDIUM",
+                        "mitigation": "Enhanced shielding and rotation schedule"
+                    }
+                ]
+            }
+        },
+        {
+            "mission_id": "MSN-9902-BETA",
+            "codename": "Crimson Horizon",
+            "status": "planning",
+            "is_classified": true,
+            "budget_credits": 8200000000,
+            "priority_level": 1,
+            "tags": [
+                "mars",
+                "cargo",
+                "habitat"
+            ],
+            "launch_details": {
+                "facility": "Baikonur Cosmodrome",
+                "pad": "Site 31",
+                "window": {
+                    "open": "2027-11-05T12:00:00Z",
+                    "close": "2027-11-20T12:00:00Z"
+                },
+                "weather_at_launch": null
+            },
+            "spacecraft": {
+                "designation": "Ares-V",
+                "type": "Heavy Cargo Transport",
+                "manufacturer": "Global Space Consortium",
+                "serial_number": "GSC-2027-005",
+                "specifications": {
+                    "dry_mass_kg": 85000,
+                    "fuel_capacity_kg": 450000,
+                    "engine_type": "Chemical Solid/Liquid Hybrid",
+                    "max_thrust_kn": 35000,
+                    "life_support_days": 30,
+                    "radiation_shielding_mm": 15,
+                    "solar_panel_area_m2": 0
+                }
+            },
+            "personnel": {
+                "commander": {
+                    "name": "David Chen",
+                    "age": 48,
+                    "species": "Human",
+                    "nationality": "Chinese-Canadian",
+                    "certifications": [
+                        "Heavy Piloting",
+                        "Logistics",
+                        "Crisis Management"
+                    ],
+                    "previous_missions": 7,
+                    "contact_next_of_kin": "Lin Chen (+1-604-0000)"
+                },
+                "crew": [
+                    {
+                        "role": "Robotics Overseer",
+                        "name": "Unit-R7",
+                        "age": 3,
+                        "nationality": "N/A",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Automated Unloading",
+                            "Hull Repair"
+                        ],
+                        "specialization": "Autonomous Systems"
+                    }
+                ]
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-003",
+                    "description": "Mars Habitat Module Beta",
+                    "weight_kg": 25000,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -100,
+                        "max_temp_c": 100,
+                        "pressurized": false
+                    }
+                },
+                {
+                    "item_id": "PL-004",
+                    "description": "Plutonium-238 RTG",
+                    "weight_kg": 45,
+                    "is_hazardous": true,
+                    "hazard_class": "Class-V Nuclear",
+                    "storage_requirements": {
+                        "min_temp_c": -200,
+                        "max_temp_c": 500,
+                        "pressurized": false
+                    }
+                },
+                {
+                    "item_id": "PL-007",
+                    "description": "Water Electrolysis Plant",
+                    "weight_kg": 3200,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -80,
+                        "max_temp_c": 120,
+                        "pressurized": false
+                    }
+                }
+            ],
+            "telemetry_log": [],
+            "mission_notes": "Awaiting final clearance from the planetary protection board.",
+            "risk_assessment": {
+                "overall_risk": "HIGH",
+                "identified_risks": [
+                    {
+                        "id": "R-03",
+                        "category": "Political",
+                        "description": "Multi-agency treaty approval delays",
+                        "probability": 0.35,
+                        "impact": "HIGH",
+                        "mitigation": "Bilateral agreement fallback with GSC"
+                    },
+                    {
+                        "id": "R-04",
+                        "category": "Technical",
+                        "description": "RTG containment breach during transit",
+                        "probability": 0.02,
+                        "impact": "CRITICAL",
+                        "mitigation": "Triple-redundant containment vessel"
+                    }
+                ]
+            }
+        },
+        {
+            "mission_id": "MSN-9903-GAMMA",
+            "codename": "Silent Echo",
+            "status": "completed",
+            "is_classified": false,
+            "budget_credits": 1200000000,
+            "priority_level": 3,
+            "tags": [
+                "satellite",
+                "unmanned",
+                "comms"
+            ],
+            "launch_details": {
+                "facility": "Guiana Space Centre",
+                "pad": "ELA-3",
+                "window": {
+                    "open": "2024-02-14T09:30:00Z",
+                    "close": "2024-02-14T11:30:00Z"
+                },
+                "weather_at_launch": {
+                    "condition": "cloudy",
+                    "wind_speed_kmh": 8.5,
+                    "temperature_celsius": 28.2,
+                    "precipitation_probability": 0.2
+                }
+            },
+            "spacecraft": {
+                "designation": "Echo-Probe-1",
+                "type": "Unmanned Satellite",
+                "manufacturer": "Orbital Systems",
+                "serial_number": "OS-2024-022",
+                "specifications": {
+                    "dry_mass_kg": 1200,
+                    "fuel_capacity_kg": 300,
+                    "engine_type": "Cold Gas Thruster",
+                    "max_thrust_kn": 5,
+                    "life_support_days": 0,
+                    "radiation_shielding_mm": 5,
+                    "solar_panel_area_m2": 18.5
+                }
+            },
+            "personnel": {
+                "commander": null,
+                "crew": []
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-005",
+                    "description": "Deep Space Optical Transceiver",
+                    "weight_kg": 85,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -40,
+                        "max_temp_c": 60,
+                        "pressurized": false
+                    }
+                }
+            ],
+            "telemetry_log": [
+                {
+                    "timestamp": "T+00:01:00",
+                    "velocity_kms": 1.5,
+                    "altitude_km": 20,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+01:30:00",
+                    "velocity_kms": 10.8,
+                    "altitude_km": 35786,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+8760:00:00",
+                    "velocity_kms": 3,
+                    "altitude_km": 35786,
+                    "systems_nominal": true
+                }
+            ],
+            "mission_notes": "Satellite successfully deployed to geostationary orbit. Mission closed.",
+            "risk_assessment": {
+                "overall_risk": "LOW",
+                "identified_risks": [
+                    {
+                        "id": "R-05",
+                        "category": "Technical",
+                        "description": "Solar panel deployment failure",
+                        "probability": 0.05,
+                        "impact": "HIGH",
+                        "mitigation": "Redundant deployment actuators"
+                    }
+                ]
+            }
+        },
+        {
+            "mission_id": "MSN-9904-DELTA",
+            "codename": "Obsidian Tide",
+            "status": "aborted",
+            "is_classified": true,
+            "budget_credits": 2750000000,
+            "priority_level": 2,
+            "tags": [
+                "asteroid-mining",
+                "crewed",
+                "classified"
+            ],
+            "launch_details": {
+                "facility": "Vandenberg Space Force Base",
+                "pad": "SLC-6",
+                "window": {
+                    "open": "2025-07-04T15:00:00Z",
+                    "close": "2025-07-06T15:00:00Z"
+                },
+                "weather_at_launch": {
+                    "condition": "stormy",
+                    "wind_speed_kmh": 62,
+                    "temperature_celsius": 14.8,
+                    "precipitation_probability": 0.91
+                }
+            },
+            "spacecraft": {
+                "designation": "Kraken-2",
+                "type": "Asteroid Mining Vessel",
+                "manufacturer": "DeepRock Industries",
+                "serial_number": "DRI-2025-007",
+                "specifications": {
+                    "dry_mass_kg": 38000,
+                    "fuel_capacity_kg": 180000,
+                    "engine_type": "Hybrid Chemical/Ion",
+                    "max_thrust_kn": 4200,
+                    "life_support_days": 90,
+                    "radiation_shielding_mm": 28,
+                    "solar_panel_area_m2": 95
+                }
+            },
+            "personnel": {
+                "commander": {
+                    "name": "Fatima Al-Sayed",
+                    "age": 39,
+                    "species": "Human",
+                    "nationality": "Emirati",
+                    "certifications": [
+                        "Heavy Piloting",
+                        "Mining Ops",
+                        "Geology",
+                        "EVA"
+                    ],
+                    "previous_missions": 2,
+                    "contact_next_of_kin": "Omar Al-Sayed (+971-50-0000)"
+                },
+                "crew": [
+                    {
+                        "role": "Mining Engineer",
+                        "name": "Joon-ho Park",
+                        "age": 44,
+                        "nationality": "South Korean",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Drill Operations",
+                            "Ore Assay",
+                            "Rock Sample Storage"
+                        ],
+                        "specialization": "Asteroid Geomechanics"
+                    },
+                    {
+                        "role": "Systems Engineer",
+                        "name": "Tatiana Volkov",
+                        "age": 36,
+                        "nationality": "Russian",
+                        "medical_clearance": false,
+                        "assigned_tasks": [
+                            "Life Support",
+                            "Power Grid"
+                        ],
+                        "specialization": "Electrical Engineering",
+                        "clearance_denied_reason": "Unresolved cardiac arrhythmia detected during final physical"
+                    }
+                ]
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-008",
+                    "description": "Autonomous Mining Drill Array",
+                    "weight_kg": 8500,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -120,
+                        "max_temp_c": 400,
+                        "pressurized": false
+                    }
+                }
+            ],
+            "telemetry_log": [
+                {
+                    "timestamp": "T+00:00:30",
+                    "velocity_kms": 0.3,
+                    "altitude_km": 2.1,
+                    "systems_nominal": false,
+                    "error_code": "ERR_STAGE2_IGNITION_FAIL"
+                }
+            ],
+            "mission_notes": "Mission aborted T+30s due to Stage 2 ignition failure. Crew recovered safely. Vessel sustained moderate damage to heat shield.",
+            "risk_assessment": {
+                "overall_risk": "CRITICAL",
+                "identified_risks": [
+                    {
+                        "id": "R-06",
+                        "category": "Technical",
+                        "description": "Stage 2 ignition failure in adverse weather",
+                        "probability": 0.4,
+                        "impact": "CRITICAL",
+                        "mitigation": "Launch window postponement protocol — NOT FOLLOWED"
+                    },
+                    {
+                        "id": "R-07",
+                        "category": "Medical",
+                        "description": "Crew member without medical clearance assigned",
+                        "probability": 0.6,
+                        "impact": "HIGH",
+                        "mitigation": "Clearance waiver requested but not received"
+                    }
+                ]
+            }
+        },
+        {
+            "mission_id": "MSN-9905-EPSILON",
+            "codename": "Pale Wanderer",
+            "status": "in_progress",
+            "is_classified": false,
+            "budget_credits": 970000000,
+            "priority_level": 2,
+            "tags": [
+                "lunar",
+                "crewed",
+                "science"
+            ],
+            "launch_details": {
+                "facility": "Kennedy Space Center",
+                "pad": "LC-39B",
+                "window": {
+                    "open": "2026-01-20T06:15:00Z",
+                    "close": "2026-01-20T08:15:00Z"
+                },
+                "weather_at_launch": {
+                    "condition": "partly_cloudy",
+                    "wind_speed_kmh": 22,
+                    "temperature_celsius": 19.5,
+                    "precipitation_probability": 0.1
+                }
+            },
+            "spacecraft": {
+                "designation": "Selene-3",
+                "type": "Lunar Lander/Orbiter Combo",
+                "manufacturer": "AeroSpace Dynamics",
+                "serial_number": "ASD-2025-018",
+                "specifications": {
+                    "dry_mass_kg": 16200,
+                    "fuel_capacity_kg": 62000,
+                    "engine_type": "Liquid Oxygen / Liquid Hydrogen",
+                    "max_thrust_kn": 780,
+                    "life_support_days": 21,
+                    "radiation_shielding_mm": 22,
+                    "solar_panel_area_m2": 64
+                }
+            },
+            "personnel": {
+                "commander": {
+                    "name": "James Okafor",
+                    "age": 45,
+                    "species": "Human",
+                    "nationality": "Nigerian-American",
+                    "certifications": [
+                        "Piloting",
+                        "Lunar Landing",
+                        "EVA",
+                        "Geology"
+                    ],
+                    "previous_missions": 3,
+                    "contact_next_of_kin": "Amara Okafor (+1-281-0000)"
+                },
+                "crew": [
+                    {
+                        "role": "Lunar Geologist",
+                        "name": "Dr. Sofia Reyes",
+                        "age": 38,
+                        "nationality": "Mexican",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Core Sampling",
+                            "Crater Mapping",
+                            "Mineral Analysis"
+                        ],
+                        "specialization": "Selenology"
+                    },
+                    {
+                        "role": "Medical Officer",
+                        "name": "Dr. Hiroshi Tanaka",
+                        "age": 52,
+                        "nationality": "Japanese",
+                        "medical_clearance": true,
+                        "assigned_tasks": [
+                            "Crew Health Monitoring",
+                            "Microgravity Research",
+                            "Emergency Response"
+                        ],
+                        "specialization": "Space Medicine"
+                    }
+                ]
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-009",
+                    "description": "Seismic Monitoring Network (6 nodes)",
+                    "weight_kg": 220,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -170,
+                        "max_temp_c": 120,
+                        "pressurized": false
+                    }
+                },
+                {
+                    "item_id": "PL-010",
+                    "description": "Helium-3 Extraction Prototype",
+                    "weight_kg": 1550,
+                    "is_hazardous": true,
+                    "hazard_class": "Class-III Pressurized Gas",
+                    "storage_requirements": {
+                        "min_temp_c": -269,
+                        "max_temp_c": -268,
+                        "pressurized": true
+                    }
+                },
+                {
+                    "item_id": "PL-011",
+                    "description": "Foldable Habitat Tent (emergency)",
+                    "weight_kg": 42,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -60,
+                        "max_temp_c": 80,
+                        "pressurized": false
+                    }
+                }
+            ],
+            "telemetry_log": [
+                {
+                    "timestamp": "T+00:01:00",
+                    "velocity_kms": 1.1,
+                    "altitude_km": 12,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+00:10:00",
+                    "velocity_kms": 6.2,
+                    "altitude_km": 210,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+00:45:00",
+                    "velocity_kms": 10.4,
+                    "altitude_km": 185000,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+03:00:00",
+                    "velocity_kms": 1.6,
+                    "altitude_km": 384400,
+                    "systems_nominal": true
+                },
+                {
+                    "timestamp": "T+72:00:00",
+                    "velocity_kms": 1.6,
+                    "altitude_km": 100,
+                    "systems_nominal": true,
+                    "note": "Lunar orbit insertion confirmed"
+                }
+            ],
+            "mission_notes": "Crew currently in lunar orbit. Surface EVA scheduled for T+80h.",
+            "risk_assessment": {
+                "overall_risk": "MEDIUM",
+                "identified_risks": [
+                    {
+                        "id": "R-08",
+                        "category": "Technical",
+                        "description": "He-3 cryogenic seal failure in lunar vacuum",
+                        "probability": 0.07,
+                        "impact": "HIGH",
+                        "mitigation": "Dual-valve isolation system"
+                    },
+                    {
+                        "id": "R-09",
+                        "category": "Environmental",
+                        "description": "Micrometeorite impact during surface EVA",
+                        "probability": 0.15,
+                        "impact": "MEDIUM",
+                        "mitigation": "Reinforced EVA suits and 2-person buddy system"
+                    }
+                ]
+            }
+        },
+        {
+            "mission_id": "MSN-9906-ZETA",
+            "codename": "Iron Meridian",
+            "status": "planning",
+            "is_classified": false,
+            "budget_credits": 15800000000,
+            "priority_level": 1,
+            "tags": [
+                "interstellar",
+                "probe",
+                "unmanned",
+                "long-duration"
+            ],
+            "launch_details": {
+                "facility": "Cape Canaveral Space Force Station",
+                "pad": "LC-40",
+                "window": {
+                    "open": "2029-06-01T00:00:00Z",
+                    "close": "2029-06-30T00:00:00Z"
+                },
+                "weather_at_launch": null
+            },
+            "spacecraft": {
+                "designation": "Meridian-Probe-Alpha",
+                "type": "Interstellar Precursor Probe",
+                "manufacturer": "Deep Systems Lab",
+                "serial_number": "DSL-2029-001",
+                "specifications": {
+                    "dry_mass_kg": 680,
+                    "fuel_capacity_kg": 4200,
+                    "engine_type": "Solar Sail + Ion Drive",
+                    "max_thrust_kn": 0.5,
+                    "life_support_days": 0,
+                    "radiation_shielding_mm": 8,
+                    "solar_panel_area_m2": 2200
+                }
+            },
+            "personnel": {
+                "commander": null,
+                "crew": []
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-012",
+                    "description": "Interstellar Dust Collector Array",
+                    "weight_kg": 38,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -273,
+                        "max_temp_c": 200,
+                        "pressurized": false
+                    }
+                },
+                {
+                    "item_id": "PL-013",
+                    "description": "Laser Communication Terminal (1TW)",
+                    "weight_kg": 55,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -260,
+                        "max_temp_c": 150,
+                        "pressurized": false
+                    }
+                },
+                {
+                    "item_id": "PL-014",
+                    "description": "Golden Record — 2nd Edition",
+                    "weight_kg": 1.2,
+                    "is_hazardous": false,
+                    "hazard_class": null,
+                    "storage_requirements": {
+                        "min_temp_c": -273,
+                        "max_temp_c": 500,
+                        "pressurized": false
+                    }
+                }
+            ],
+            "telemetry_log": [],
+            "mission_notes": "Design phase in progress. Propulsion team finalizing solar sail deployment mechanism.",
+            "risk_assessment": {
+                "overall_risk": "LOW",
+                "identified_risks": [
+                    {
+                        "id": "R-10",
+                        "category": "Technical",
+                        "description": "Solar sail micrometeorite perforation",
+                        "probability": 0.2,
+                        "impact": "MEDIUM",
+                        "mitigation": "Redundant sail panels with self-sealing Kapton layers"
+                    },
+                    {
+                        "id": "R-11",
+                        "category": "Operational",
+                        "description": "Signal loss beyond 1000 AU",
+                        "probability": 0.55,
+                        "impact": "LOW",
+                        "mitigation": "Laser comms extend range vs radio; accepted risk"
+                    }
+                ]
+            }
+        },
+        {
+            "mission_id": "MSN-9907-ETA",
+            "codename": "Neon Requiem",
+            "status": "on_hold",
+            "is_classified": true,
+            "budget_credits": 3300000000,
+            "priority_level": 2,
+            "tags": [
+                "classified",
+                "crewed",
+                "orbital-defense"
+            ],
+            "launch_details": {
+                "facility": "CLASSIFIED",
+                "pad": "CLASSIFIED",
+                "window": {
+                    "open": "CLASSIFIED",
+                    "close": "CLASSIFIED"
+                },
+                "weather_at_launch": null
+            },
+            "spacecraft": {
+                "designation": "CLASSIFIED",
+                "type": "Orbital Defense Platform",
+                "manufacturer": "CLASSIFIED",
+                "serial_number": "CLASSIFIED",
+                "specifications": {
+                    "dry_mass_kg": 55000,
+                    "fuel_capacity_kg": 220000,
+                    "engine_type": "CLASSIFIED",
+                    "max_thrust_kn": 9800,
+                    "life_support_days": 120,
+                    "radiation_shielding_mm": 60,
+                    "solar_panel_area_m2": 0
+                }
+            },
+            "personnel": {
+                "commander": {
+                    "name": "CLASSIFIED",
+                    "age": null,
+                    "species": "Human",
+                    "nationality": "CLASSIFIED",
+                    "certifications": [
+                        "CLASSIFIED"
+                    ],
+                    "previous_missions": null,
+                    "contact_next_of_kin": "CLASSIFIED"
+                },
+                "crew": []
+            },
+            "payloads": [
+                {
+                    "item_id": "PL-015",
+                    "description": "CLASSIFIED",
+                    "weight_kg": 12000,
+                    "is_hazardous": true,
+                    "hazard_class": "CLASSIFIED",
+                    "storage_requirements": {
+                        "min_temp_c": -40,
+                        "max_temp_c": 60,
+                        "pressurized": true
+                    }
+                }
+            ],
+            "telemetry_log": [],
+            "mission_notes": "Mission placed on hold pending committee review. All details classified at Level-9 clearance.",
+            "risk_assessment": {
+                "overall_risk": "CLASSIFIED",
+                "identified_risks": []
+            }
+        }
+    ],
+    "facilities": [
+        {
+            "facility_id": "FAC-001",
+            "name": "Cape Canaveral Space Force Station",
+            "country": "USA",
+            "active_pads": [
+                "LC-39A",
+                "LC-39B",
+                "LC-40"
+            ],
+            "annual_launch_capacity": 24,
+            "staff_count": 4200,
+            "coordinates": {
+                "lat": 28.5623,
+                "lon": -80.5774
+            }
+        },
+        {
+            "facility_id": "FAC-002",
+            "name": "Baikonur Cosmodrome",
+            "country": "Kazakhstan",
+            "active_pads": [
+                "Site 1",
+                "Site 31",
+                "Site 200"
+            ],
+            "annual_launch_capacity": 18,
+            "staff_count": 3100,
+            "coordinates": {
+                "lat": 45.92,
+                "lon": 63.342
+            }
+        },
+        {
+            "facility_id": "FAC-003",
+            "name": "Guiana Space Centre",
+            "country": "France/ESA",
+            "active_pads": [
+                "ELA-1",
+                "ELA-3",
+                "ELA-4"
+            ],
+            "annual_launch_capacity": 12,
+            "staff_count": 1800,
+            "coordinates": {
+                "lat": 5.2322,
+                "lon": -52.7693
+            }
+        },
+        {
+            "facility_id": "FAC-004",
+            "name": "Vandenberg Space Force Base",
+            "country": "USA",
+            "active_pads": [
+                "SLC-3E",
+                "SLC-6"
+            ],
+            "annual_launch_capacity": 10,
+            "staff_count": 2400,
+            "coordinates": {
+                "lat": 34.742,
+                "lon": -120.5724
+            }
+        },
+        {
+            "facility_id": "FAC-005",
+            "name": "Kennedy Space Center",
+            "country": "USA",
+            "active_pads": [
+                "LC-39B"
+            ],
+            "annual_launch_capacity": 6,
+            "staff_count": 1500,
+            "coordinates": {
+                "lat": 28.5729,
+                "lon": -80.649
+            }
+        }
+    ],
+    "budget_summary": {
+        "currency": "Galactic Credits (GC)",
+        "total_allocated": 36720000000.5,
+        "total_spent": 8410000000,
+        "total_remaining": 28310000000.5,
+        "breakdown_by_status": {
+            "completed": 1200000000,
+            "in_progress": 5470000000.5,
+            "planning": 24000000000,
+            "aborted": 2750000000,
+            "on_hold": 3300000000
+        },
+        "top_expenditures": [
+            {
+                "category": "Spacecraft Manufacturing",
+                "amount": 4100000000
+            },
+            {
+                "category": "Personnel & Training",
+                "amount": 1800000000
+            },
+            {
+                "category": "Payload Development",
+                "amount": 950000000
+            },
+            {
+                "category": "Facility Operations",
+                "amount": 560000000
+            }
+        ]
     }
-  },
-  "missions": [
-    {
-      "mission_id": "MSN-9901-ALPHA",
-      "codename": "Stellar Vanguard",
-      "status": "in_progress",
-      "is_classified": false,
-      "budget_credits": 4500000000.50,
-      "priority_level": 1,
-      "tags": ["deep-space", "exploration", "crewed"],
-      "launch_details": {
-        "facility": "Cape Canaveral Space Force Station",
-        "pad": "LC-39A",
-        "window": {
-          "open": "2026-04-12T08:00:00Z",
-          "close": "2026-04-14T20:00:00Z"
-        },
-        "weather_at_launch": {
-          "condition": "clear",
-          "wind_speed_kmh": 12.4,
-          "temperature_celsius": 24.1,
-          "precipitation_probability": 0.05
-        }
-      },
-      "spacecraft": {
-        "designation": "Vanguard-1",
-        "type": "Deep Space Explorer",
-        "manufacturer": "AeroSpace Dynamics",
-        "serial_number": "ASD-2024-001",
-        "specifications": {
-          "dry_mass_kg": 24500,
-          "fuel_capacity_kg": 105000,
-          "engine_type": "Ion-Plasma Drive",
-          "max_thrust_kn": 1500,
-          "life_support_days": 180,
-          "radiation_shielding_mm": 35,
-          "solar_panel_area_m2": 220.0
-        }
-      },
-      "personnel": {
-        "commander": {
-          "name": "Elena Rostova",
-          "age": 42,
-          "species": "Human",
-          "nationality": "Russian",
-          "certifications": ["Piloting", "EVA", "Astrophysics", "Emergency Medicine"],
-          "previous_missions": 4,
-          "contact_next_of_kin": "Andrei Rostov (+7-495-0000)"
-        },
-        "crew": [
-          {
-            "role": "Flight Engineer",
-            "name": "Marcus Vance",
-            "age": 35,
-            "nationality": "American",
-            "medical_clearance": true,
-            "assigned_tasks": ["Systems Maintenance", "Propulsion Monitoring"],
-            "specialization": "Mechanical Engineering"
-          },
-          {
-            "role": "Payload Specialist",
-            "name": "Dr. Aris Thorne",
-            "age": 50,
-            "nationality": "British",
-            "medical_clearance": true,
-            "assigned_tasks": ["Biological Experiments", "Sample Collection"],
-            "specialization": "Xenobiology"
-          },
-          {
-            "role": "Communications Officer",
-            "name": "Priya Mehta",
-            "age": 31,
-            "nationality": "Indian",
-            "medical_clearance": true,
-            "assigned_tasks": ["Signal Relay", "Data Encryption", "Ground Comms"],
-            "specialization": "Quantum Cryptography"
-          }
-        ]
-      },
-      "payloads": [
-        {
-          "item_id": "PL-001",
-          "description": "Quantum Stabilizer Core",
-          "weight_kg": 450.5,
-          "is_hazardous": true,
-          "hazard_class": "Class-IV Radiation",
-          "storage_requirements": {
-            "min_temp_c": -50,
-            "max_temp_c": -10,
-            "pressurized": true
-          }
-        },
-        {
-          "item_id": "PL-002",
-          "description": "Hydroponic Seed Vault",
-          "weight_kg": 120.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": {
-            "min_temp_c": 5,
-            "max_temp_c": 25,
-            "pressurized": true
-          }
-        },
-        {
-          "item_id": "PL-006",
-          "description": "Autonomous Drone Swarm (x12)",
-          "weight_kg": 340.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": {
-            "min_temp_c": -20,
-            "max_temp_c": 50,
-            "pressurized": false
-          }
-        }
-      ],
-      "telemetry_log": [
-        { "timestamp": "T+00:01:00", "velocity_kms": 1.2, "altitude_km": 15.4, "systems_nominal": true },
-        { "timestamp": "T+00:05:00", "velocity_kms": 4.5, "altitude_km": 85.2, "systems_nominal": true },
-        { "timestamp": "T+00:15:00", "velocity_kms": 7.8, "altitude_km": 400.1, "systems_nominal": true },
-        { "timestamp": "T+01:00:00", "velocity_kms": 11.2, "altitude_km": 384400.0, "systems_nominal": false, "error_code": "WARN_O2_PRESSURE" },
-        { "timestamp": "T+02:30:00", "velocity_kms": 15.6, "altitude_km": 820000.0, "systems_nominal": true },
-        { "timestamp": "T+24:00:00", "velocity_kms": 22.1, "altitude_km": 4500000.0, "systems_nominal": true }
-      ],
-      "mission_notes": null,
-      "risk_assessment": {
-        "overall_risk": "MEDIUM",
-        "identified_risks": [
-          { "id": "R-01", "category": "Technical", "description": "Ion drive thermal overload at max thrust", "probability": 0.08, "impact": "HIGH", "mitigation": "Throttle cap at 85%" },
-          { "id": "R-02", "category": "Medical", "description": "Crew radiation exposure beyond 180 days", "probability": 0.12, "impact": "MEDIUM", "mitigation": "Enhanced shielding and rotation schedule" }
-        ]
-      }
-    },
-    {
-      "mission_id": "MSN-9902-BETA",
-      "codename": "Crimson Horizon",
-      "status": "planning",
-      "is_classified": true,
-      "budget_credits": 8200000000.00,
-      "priority_level": 1,
-      "tags": ["mars", "cargo", "habitat"],
-      "launch_details": {
-        "facility": "Baikonur Cosmodrome",
-        "pad": "Site 31",
-        "window": {
-          "open": "2027-11-05T12:00:00Z",
-          "close": "2027-11-20T12:00:00Z"
-        },
-        "weather_at_launch": null
-      },
-      "spacecraft": {
-        "designation": "Ares-V",
-        "type": "Heavy Cargo Transport",
-        "manufacturer": "Global Space Consortium",
-        "serial_number": "GSC-2027-005",
-        "specifications": {
-          "dry_mass_kg": 85000,
-          "fuel_capacity_kg": 450000,
-          "engine_type": "Chemical Solid/Liquid Hybrid",
-          "max_thrust_kn": 35000,
-          "life_support_days": 30,
-          "radiation_shielding_mm": 15,
-          "solar_panel_area_m2": 0.0
-        }
-      },
-      "personnel": {
-        "commander": {
-          "name": "David Chen",
-          "age": 48,
-          "species": "Human",
-          "nationality": "Chinese-Canadian",
-          "certifications": ["Heavy Piloting", "Logistics", "Crisis Management"],
-          "previous_missions": 7,
-          "contact_next_of_kin": "Lin Chen (+1-604-0000)"
-        },
-        "crew": [
-          {
-            "role": "Robotics Overseer",
-            "name": "Unit-R7",
-            "age": 3,
-            "nationality": "N/A",
-            "medical_clearance": true,
-            "assigned_tasks": ["Automated Unloading", "Hull Repair"],
-            "specialization": "Autonomous Systems"
-          }
-        ]
-      },
-      "payloads": [
-        {
-          "item_id": "PL-003",
-          "description": "Mars Habitat Module Beta",
-          "weight_kg": 25000.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": {
-            "min_temp_c": -100,
-            "max_temp_c": 100,
-            "pressurized": false
-          }
-        },
-        {
-          "item_id": "PL-004",
-          "description": "Plutonium-238 RTG",
-          "weight_kg": 45.0,
-          "is_hazardous": true,
-          "hazard_class": "Class-V Nuclear",
-          "storage_requirements": {
-            "min_temp_c": -200,
-            "max_temp_c": 500,
-            "pressurized": false
-          }
-        },
-        {
-          "item_id": "PL-007",
-          "description": "Water Electrolysis Plant",
-          "weight_kg": 3200.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": {
-            "min_temp_c": -80,
-            "max_temp_c": 120,
-            "pressurized": false
-          }
-        }
-      ],
-      "telemetry_log": [],
-      "mission_notes": "Awaiting final clearance from the planetary protection board.",
-      "risk_assessment": {
-        "overall_risk": "HIGH",
-        "identified_risks": [
-          { "id": "R-03", "category": "Political", "description": "Multi-agency treaty approval delays", "probability": 0.35, "impact": "HIGH", "mitigation": "Bilateral agreement fallback with GSC" },
-          { "id": "R-04", "category": "Technical", "description": "RTG containment breach during transit", "probability": 0.02, "impact": "CRITICAL", "mitigation": "Triple-redundant containment vessel" }
-        ]
-      }
-    },
-    {
-      "mission_id": "MSN-9903-GAMMA",
-      "codename": "Silent Echo",
-      "status": "completed",
-      "is_classified": false,
-      "budget_credits": 1200000000.00,
-      "priority_level": 3,
-      "tags": ["satellite", "unmanned", "comms"],
-      "launch_details": {
-        "facility": "Guiana Space Centre",
-        "pad": "ELA-3",
-        "window": {
-          "open": "2024-02-14T09:30:00Z",
-          "close": "2024-02-14T11:30:00Z"
-        },
-        "weather_at_launch": {
-          "condition": "cloudy",
-          "wind_speed_kmh": 8.5,
-          "temperature_celsius": 28.2,
-          "precipitation_probability": 0.20
-        }
-      },
-      "spacecraft": {
-        "designation": "Echo-Probe-1",
-        "type": "Unmanned Satellite",
-        "manufacturer": "Orbital Systems",
-        "serial_number": "OS-2024-022",
-        "specifications": {
-          "dry_mass_kg": 1200,
-          "fuel_capacity_kg": 300,
-          "engine_type": "Cold Gas Thruster",
-          "max_thrust_kn": 5,
-          "life_support_days": 0,
-          "radiation_shielding_mm": 5,
-          "solar_panel_area_m2": 18.5
-        }
-      },
-      "personnel": {
-        "commander": null,
-        "crew": []
-      },
-      "payloads": [
-        {
-          "item_id": "PL-005",
-          "description": "Deep Space Optical Transceiver",
-          "weight_kg": 85.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": {
-            "min_temp_c": -40,
-            "max_temp_c": 60,
-            "pressurized": false
-          }
-        }
-      ],
-      "telemetry_log": [
-        { "timestamp": "T+00:01:00", "velocity_kms": 1.5, "altitude_km": 20.0, "systems_nominal": true },
-        { "timestamp": "T+01:30:00", "velocity_kms": 10.8, "altitude_km": 35786.0, "systems_nominal": true },
-        { "timestamp": "T+8760:00:00", "velocity_kms": 3.0, "altitude_km": 35786.0, "systems_nominal": true }
-      ],
-      "mission_notes": "Satellite successfully deployed to geostationary orbit. Mission closed.",
-      "risk_assessment": {
-        "overall_risk": "LOW",
-        "identified_risks": [
-          { "id": "R-05", "category": "Technical", "description": "Solar panel deployment failure", "probability": 0.05, "impact": "HIGH", "mitigation": "Redundant deployment actuators" }
-        ]
-      }
-    },
-    {
-      "mission_id": "MSN-9904-DELTA",
-      "codename": "Obsidian Tide",
-      "status": "aborted",
-      "is_classified": true,
-      "budget_credits": 2750000000.00,
-      "priority_level": 2,
-      "tags": ["asteroid-mining", "crewed", "classified"],
-      "launch_details": {
-        "facility": "Vandenberg Space Force Base",
-        "pad": "SLC-6",
-        "window": {
-          "open": "2025-07-04T15:00:00Z",
-          "close": "2025-07-06T15:00:00Z"
-        },
-        "weather_at_launch": {
-          "condition": "stormy",
-          "wind_speed_kmh": 62.0,
-          "temperature_celsius": 14.8,
-          "precipitation_probability": 0.91
-        }
-      },
-      "spacecraft": {
-        "designation": "Kraken-2",
-        "type": "Asteroid Mining Vessel",
-        "manufacturer": "DeepRock Industries",
-        "serial_number": "DRI-2025-007",
-        "specifications": {
-          "dry_mass_kg": 38000,
-          "fuel_capacity_kg": 180000,
-          "engine_type": "Hybrid Chemical/Ion",
-          "max_thrust_kn": 4200,
-          "life_support_days": 90,
-          "radiation_shielding_mm": 28,
-          "solar_panel_area_m2": 95.0
-        }
-      },
-      "personnel": {
-        "commander": {
-          "name": "Fatima Al-Sayed",
-          "age": 39,
-          "species": "Human",
-          "nationality": "Emirati",
-          "certifications": ["Heavy Piloting", "Mining Ops", "Geology", "EVA"],
-          "previous_missions": 2,
-          "contact_next_of_kin": "Omar Al-Sayed (+971-50-0000)"
-        },
-        "crew": [
-          {
-            "role": "Mining Engineer",
-            "name": "Joon-ho Park",
-            "age": 44,
-            "nationality": "South Korean",
-            "medical_clearance": true,
-            "assigned_tasks": ["Drill Operations", "Ore Assay", "Rock Sample Storage"],
-            "specialization": "Asteroid Geomechanics"
-          },
-          {
-            "role": "Systems Engineer",
-            "name": "Tatiana Volkov",
-            "age": 36,
-            "nationality": "Russian",
-            "medical_clearance": false,
-            "assigned_tasks": ["Life Support", "Power Grid"],
-            "specialization": "Electrical Engineering",
-            "clearance_denied_reason": "Unresolved cardiac arrhythmia detected during final physical"
-          }
-        ]
-      },
-      "payloads": [
-        {
-          "item_id": "PL-008",
-          "description": "Autonomous Mining Drill Array",
-          "weight_kg": 8500.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": {
-            "min_temp_c": -120,
-            "max_temp_c": 400,
-            "pressurized": false
-          }
-        }
-      ],
-      "telemetry_log": [
-        { "timestamp": "T+00:00:30", "velocity_kms": 0.3, "altitude_km": 2.1, "systems_nominal": false, "error_code": "ERR_STAGE2_IGNITION_FAIL" }
-      ],
-      "mission_notes": "Mission aborted T+30s due to Stage 2 ignition failure. Crew recovered safely. Vessel sustained moderate damage to heat shield.",
-      "risk_assessment": {
-        "overall_risk": "CRITICAL",
-        "identified_risks": [
-          { "id": "R-06", "category": "Technical", "description": "Stage 2 ignition failure in adverse weather", "probability": 0.40, "impact": "CRITICAL", "mitigation": "Launch window postponement protocol — NOT FOLLOWED" },
-          { "id": "R-07", "category": "Medical", "description": "Crew member without medical clearance assigned", "probability": 0.60, "impact": "HIGH", "mitigation": "Clearance waiver requested but not received" }
-        ]
-      }
-    },
-    {
-      "mission_id": "MSN-9905-EPSILON",
-      "codename": "Pale Wanderer",
-      "status": "in_progress",
-      "is_classified": false,
-      "budget_credits": 970000000.00,
-      "priority_level": 2,
-      "tags": ["lunar", "crewed", "science"],
-      "launch_details": {
-        "facility": "Kennedy Space Center",
-        "pad": "LC-39B",
-        "window": {
-          "open": "2026-01-20T06:15:00Z",
-          "close": "2026-01-20T08:15:00Z"
-        },
-        "weather_at_launch": {
-          "condition": "partly_cloudy",
-          "wind_speed_kmh": 22.0,
-          "temperature_celsius": 19.5,
-          "precipitation_probability": 0.10
-        }
-      },
-      "spacecraft": {
-        "designation": "Selene-3",
-        "type": "Lunar Lander/Orbiter Combo",
-        "manufacturer": "AeroSpace Dynamics",
-        "serial_number": "ASD-2025-018",
-        "specifications": {
-          "dry_mass_kg": 16200,
-          "fuel_capacity_kg": 62000,
-          "engine_type": "Liquid Oxygen / Liquid Hydrogen",
-          "max_thrust_kn": 780,
-          "life_support_days": 21,
-          "radiation_shielding_mm": 22,
-          "solar_panel_area_m2": 64.0
-        }
-      },
-      "personnel": {
-        "commander": {
-          "name": "James Okafor",
-          "age": 45,
-          "species": "Human",
-          "nationality": "Nigerian-American",
-          "certifications": ["Piloting", "Lunar Landing", "EVA", "Geology"],
-          "previous_missions": 3,
-          "contact_next_of_kin": "Amara Okafor (+1-281-0000)"
-        },
-        "crew": [
-          {
-            "role": "Lunar Geologist",
-            "name": "Dr. Sofia Reyes",
-            "age": 38,
-            "nationality": "Mexican",
-            "medical_clearance": true,
-            "assigned_tasks": ["Core Sampling", "Crater Mapping", "Mineral Analysis"],
-            "specialization": "Selenology"
-          },
-          {
-            "role": "Medical Officer",
-            "name": "Dr. Hiroshi Tanaka",
-            "age": 52,
-            "nationality": "Japanese",
-            "medical_clearance": true,
-            "assigned_tasks": ["Crew Health Monitoring", "Microgravity Research", "Emergency Response"],
-            "specialization": "Space Medicine"
-          }
-        ]
-      },
-      "payloads": [
-        {
-          "item_id": "PL-009",
-          "description": "Seismic Monitoring Network (6 nodes)",
-          "weight_kg": 220.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": { "min_temp_c": -170, "max_temp_c": 120, "pressurized": false }
-        },
-        {
-          "item_id": "PL-010",
-          "description": "Helium-3 Extraction Prototype",
-          "weight_kg": 1550.0,
-          "is_hazardous": true,
-          "hazard_class": "Class-III Pressurized Gas",
-          "storage_requirements": { "min_temp_c": -269, "max_temp_c": -268, "pressurized": true }
-        },
-        {
-          "item_id": "PL-011",
-          "description": "Foldable Habitat Tent (emergency)",
-          "weight_kg": 42.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": { "min_temp_c": -60, "max_temp_c": 80, "pressurized": false }
-        }
-      ],
-      "telemetry_log": [
-        { "timestamp": "T+00:01:00", "velocity_kms": 1.1, "altitude_km": 12.0, "systems_nominal": true },
-        { "timestamp": "T+00:10:00", "velocity_kms": 6.2, "altitude_km": 210.0, "systems_nominal": true },
-        { "timestamp": "T+00:45:00", "velocity_kms": 10.4, "altitude_km": 185000.0, "systems_nominal": true },
-        { "timestamp": "T+03:00:00", "velocity_kms": 1.6, "altitude_km": 384400.0, "systems_nominal": true },
-        { "timestamp": "T+72:00:00", "velocity_kms": 1.6, "altitude_km": 100.0, "systems_nominal": true, "note": "Lunar orbit insertion confirmed" }
-      ],
-      "mission_notes": "Crew currently in lunar orbit. Surface EVA scheduled for T+80h.",
-      "risk_assessment": {
-        "overall_risk": "MEDIUM",
-        "identified_risks": [
-          { "id": "R-08", "category": "Technical", "description": "He-3 cryogenic seal failure in lunar vacuum", "probability": 0.07, "impact": "HIGH", "mitigation": "Dual-valve isolation system" },
-          { "id": "R-09", "category": "Environmental", "description": "Micrometeorite impact during surface EVA", "probability": 0.15, "impact": "MEDIUM", "mitigation": "Reinforced EVA suits and 2-person buddy system" }
-        ]
-      }
-    },
-    {
-      "mission_id": "MSN-9906-ZETA",
-      "codename": "Iron Meridian",
-      "status": "planning",
-      "is_classified": false,
-      "budget_credits": 15800000000.00,
-      "priority_level": 1,
-      "tags": ["interstellar", "probe", "unmanned", "long-duration"],
-      "launch_details": {
-        "facility": "Cape Canaveral Space Force Station",
-        "pad": "LC-40",
-        "window": { "open": "2029-06-01T00:00:00Z", "close": "2029-06-30T00:00:00Z" },
-        "weather_at_launch": null
-      },
-      "spacecraft": {
-        "designation": "Meridian-Probe-Alpha",
-        "type": "Interstellar Precursor Probe",
-        "manufacturer": "Deep Systems Lab",
-        "serial_number": "DSL-2029-001",
-        "specifications": {
-          "dry_mass_kg": 680,
-          "fuel_capacity_kg": 4200,
-          "engine_type": "Solar Sail + Ion Drive",
-          "max_thrust_kn": 0.5,
-          "life_support_days": 0,
-          "radiation_shielding_mm": 8,
-          "solar_panel_area_m2": 2200.0
-        }
-      },
-      "personnel": { "commander": null, "crew": [] },
-      "payloads": [
-        {
-          "item_id": "PL-012",
-          "description": "Interstellar Dust Collector Array",
-          "weight_kg": 38.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": { "min_temp_c": -273, "max_temp_c": 200, "pressurized": false }
-        },
-        {
-          "item_id": "PL-013",
-          "description": "Laser Communication Terminal (1TW)",
-          "weight_kg": 55.0,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": { "min_temp_c": -260, "max_temp_c": 150, "pressurized": false }
-        },
-        {
-          "item_id": "PL-014",
-          "description": "Golden Record — 2nd Edition",
-          "weight_kg": 1.2,
-          "is_hazardous": false,
-          "hazard_class": null,
-          "storage_requirements": { "min_temp_c": -273, "max_temp_c": 500, "pressurized": false }
-        }
-      ],
-      "telemetry_log": [],
-      "mission_notes": "Design phase in progress. Propulsion team finalizing solar sail deployment mechanism.",
-      "risk_assessment": {
-        "overall_risk": "LOW",
-        "identified_risks": [
-          { "id": "R-10", "category": "Technical", "description": "Solar sail micrometeorite perforation", "probability": 0.20, "impact": "MEDIUM", "mitigation": "Redundant sail panels with self-sealing Kapton layers" },
-          { "id": "R-11", "category": "Operational", "description": "Signal loss beyond 1000 AU", "probability": 0.55, "impact": "LOW", "mitigation": "Laser comms extend range vs radio; accepted risk" }
-        ]
-      }
-    },
-    {
-      "mission_id": "MSN-9907-ETA",
-      "codename": "Neon Requiem",
-      "status": "on_hold",
-      "is_classified": true,
-      "budget_credits": 3300000000.00,
-      "priority_level": 2,
-      "tags": ["classified", "crewed", "orbital-defense"],
-      "launch_details": {
-        "facility": "CLASSIFIED",
-        "pad": "CLASSIFIED",
-        "window": { "open": "CLASSIFIED", "close": "CLASSIFIED" },
-        "weather_at_launch": null
-      },
-      "spacecraft": {
-        "designation": "CLASSIFIED",
-        "type": "Orbital Defense Platform",
-        "manufacturer": "CLASSIFIED",
-        "serial_number": "CLASSIFIED",
-        "specifications": {
-          "dry_mass_kg": 55000,
-          "fuel_capacity_kg": 220000,
-          "engine_type": "CLASSIFIED",
-          "max_thrust_kn": 9800,
-          "life_support_days": 120,
-          "radiation_shielding_mm": 60,
-          "solar_panel_area_m2": 0.0
-        }
-      },
-      "personnel": {
-        "commander": {
-          "name": "CLASSIFIED",
-          "age": null,
-          "species": "Human",
-          "nationality": "CLASSIFIED",
-          "certifications": ["CLASSIFIED"],
-          "previous_missions": null,
-          "contact_next_of_kin": "CLASSIFIED"
-        },
-        "crew": []
-      },
-      "payloads": [
-        {
-          "item_id": "PL-015",
-          "description": "CLASSIFIED",
-          "weight_kg": 12000.0,
-          "is_hazardous": true,
-          "hazard_class": "CLASSIFIED",
-          "storage_requirements": { "min_temp_c": -40, "max_temp_c": 60, "pressurized": true }
-        }
-      ],
-      "telemetry_log": [],
-      "mission_notes": "Mission placed on hold pending committee review. All details classified at Level-9 clearance.",
-      "risk_assessment": {
-        "overall_risk": "CLASSIFIED",
-        "identified_risks": []
-      }
-    }
-  ],
-  "facilities": [
-    {
-      "facility_id": "FAC-001",
-      "name": "Cape Canaveral Space Force Station",
-      "country": "USA",
-      "active_pads": ["LC-39A", "LC-39B", "LC-40"],
-      "annual_launch_capacity": 24,
-      "staff_count": 4200,
-      "coordinates": { "lat": 28.5623, "lon": -80.5774 }
-    },
-    {
-      "facility_id": "FAC-002",
-      "name": "Baikonur Cosmodrome",
-      "country": "Kazakhstan",
-      "active_pads": ["Site 1", "Site 31", "Site 200"],
-      "annual_launch_capacity": 18,
-      "staff_count": 3100,
-      "coordinates": { "lat": 45.9200, "lon": 63.3420 }
-    },
-    {
-      "facility_id": "FAC-003",
-      "name": "Guiana Space Centre",
-      "country": "France/ESA",
-      "active_pads": ["ELA-1", "ELA-3", "ELA-4"],
-      "annual_launch_capacity": 12,
-      "staff_count": 1800,
-      "coordinates": { "lat": 5.2322, "lon": -52.7693 }
-    },
-    {
-      "facility_id": "FAC-004",
-      "name": "Vandenberg Space Force Base",
-      "country": "USA",
-      "active_pads": ["SLC-3E", "SLC-6"],
-      "annual_launch_capacity": 10,
-      "staff_count": 2400,
-      "coordinates": { "lat": 34.7420, "lon": -120.5724 }
-    },
-    {
-      "facility_id": "FAC-005",
-      "name": "Kennedy Space Center",
-      "country": "USA",
-      "active_pads": ["LC-39B"],
-      "annual_launch_capacity": 6,
-      "staff_count": 1500,
-      "coordinates": { "lat": 28.5729, "lon": -80.6490 }
-    }
-  ],
-  "budget_summary": {
-    "currency": "Galactic Credits (GC)",
-    "total_allocated": 36720000000.50,
-    "total_spent": 8410000000.00,
-    "total_remaining": 28310000000.50,
-    "breakdown_by_status": {
-      "completed": 1200000000.00,
-      "in_progress": 5470000000.50,
-      "planning": 24000000000.00,
-      "aborted": 2750000000.00,
-      "on_hold": 3300000000.00
-    },
-    "top_expenditures": [
-      { "category": "Spacecraft Manufacturing", "amount": 4100000000.00 },
-      { "category": "Personnel & Training", "amount": 1800000000.00 },
-      { "category": "Payload Development", "amount": 950000000.00 },
-      { "category": "Facility Operations", "amount": 560000000.00 }
-    ]
-  }
 }

@@ -27,12 +27,12 @@
 <br />
 
 ```bash
-pip install universal-json-agent-mcp
+uv tool install universal-json-agent-mcp
 ```
 
 <br />
 
-[**Getting Started**](#-getting-started) &nbsp;&middot;&nbsp; [**26 Tools**](#-tools-reference) &nbsp;&middot;&nbsp; [**Web API**](#-web-api-server) &nbsp;&middot;&nbsp; [**Development**](#-development)
+[**Getting Started**](#-getting-started) &nbsp;&middot;&nbsp; [**26 Tools**](#-tools-reference) &nbsp;&middot;&nbsp; [**Web Server**](#-web-server-subproject-web) &nbsp;&middot;&nbsp; [**Development**](#-development)
 
 </div>
 
@@ -42,7 +42,6 @@ pip install universal-json-agent-mcp
 
 Working with JSON shouldn't require writing a script every time. This tool lets you ask questions in plain English and get answers instantly.
 
-<div align="center">
 
 ```
 You:  What's the total budget across all missions?
@@ -51,7 +50,6 @@ AI:   The total budget across all missions is $18,250,000,000.50
       (Used tools: load_json → sum_values)
 ```
 
-</div>
 
 ### Supported Clients
 
@@ -70,9 +68,9 @@ AI:   The total budget across all missions is $18,250,000,000.50
 ### 1. Install
 
 ```bash
-pip install universal-json-agent-mcp     # pip
-uv add universal-json-agent-mcp          # uv
-uvx universal-json-agent-mcp             # zero-install, runs instantly
+uv tool install universal-json-agent-mcp   # install CLI once
+uvx universal-json-agent-mcp               # run without installing
+uv add universal-json-agent-mcp            # add dependency to your project
 ```
 
 ### 2. Configure your editor
@@ -137,7 +135,7 @@ Add to your Cursor MCP settings:
 ```bash
 universal-json-agent-mcp
 # or
-python -m universal_json_agent_mcp
+uv run python -m universal_json_agent_mcp
 ```
 
 Starts on **stdio** — pipe any MCP client into it.
@@ -227,14 +225,15 @@ Starts on **stdio** — pipe any MCP client into it.
 
 ---
 
-## 🌐 Web API Server
+## 🌐 Web Server Subproject (web/)
 
-> Optional **FastAPI + LangChain** REST API wrapping all 26 tools — for integrations, dashboards, or non-MCP workflows.
+> Optional **FastAPI + LangChain** web-server subproject inside this repo, wrapping all 26 root MCP tools for integrations, dashboards, or non-MCP workflows.
 
 ```bash
-pip install -r web/requirements.txt      # install deps
+uv sync --extra web                       # install web deps with uv
 cp .env.example .env                     # add your OpenRouter key
-python -m web.run --port 8000            # start server
+uv run python -m web.run --port 8000     # start server with uv
+# open docs in browser: http://127.0.0.1:8000/docs
 ```
 
 ### Endpoints
@@ -267,38 +266,6 @@ curl -X POST http://localhost:8000/query \
 |:---------|:--------:|:--------|:------------|
 | `OPENROUTER_API_KEY` | ✅ | — | Your [OpenRouter](https://openrouter.ai/) API key |
 | `OPENROUTER_MODEL` | — | `openai/gpt-4o-mini` | Any [supported model](https://openrouter.ai/models) |
-
----
-
-## 🏗 Project Structure
-
-```
-universal-json-agent/
-│
-├── src/universal_json_agent_mcp/   # MCP Server (pip-installable)
-│   ├── server.py                   #   FastMCP entry point — 26 tools
-│   ├── store.py                    #   In-memory JSON document store
-│   ├── tools/
-│   │   ├── load.py                 #   load · list · unload
-│   │   ├── explore.py              #   keys · value · type · structure
-│   │   ├── query.py                #   jsonpath · filter · search
-│   │   ├── aggregate.py            #   count · sum · min/max · unique · value_counts
-│   │   ├── transform.py            #   flatten · pick · group · sort · sample
-│   │   ├── stats.py                #   describe
-│   │   ├── advanced_query.py       #   multi_filter · compare
-│   │   ├── export.py               #   CSV · JSON export
-│   │   └── introspect.py           #   distinct_paths
-│   └── utils/
-│       ├── path_resolver.py        #   Dot/bracket path navigation
-│       └── truncation.py           #   Smart output truncation
-│
-├── web/                            #   FastAPI + LangChain server
-├── tests/                          #   489 tests
-├── assets/                         #   Logo & media
-├── pyproject.toml
-├── LICENSE                         #   MIT
-└── README.md
-```
 
 ---
 
@@ -371,7 +338,7 @@ The model provider is rate-limiting you. Wait a moment or switch to a different 
 <summary><b>Import errors in web server</b></summary>
 
 ```bash
-pip install -r web/requirements.txt
+uv sync --extra web
 ```
 
 </details>
@@ -380,6 +347,6 @@ pip install -r web/requirements.txt
 
 <div align="center">
 
-[MIT License](LICENSE) · Built by [Gautam Vhavle](https://github.com/GautamVhavle) · Star this repo if it helped you ⭐
+[MIT License](LICENSE) · Built with ❤️ by [Gautam Vhavle](https://github.com/GautamVhavle) · Star this repo if it helped you ⭐
 
 </div>

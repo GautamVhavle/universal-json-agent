@@ -10,11 +10,12 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+
+from universal_json_agent_mcp.utils.json_types import json_type_name
 
 logger = logging.getLogger(__name__)
 
@@ -115,7 +116,7 @@ class JSONStore:
             alias=alias,
             file_path=str(path),
             file_size_bytes=file_size,
-            root_type=self._json_type_name(data),
+            root_type=json_type_name(data),
             top_level_count=self._top_level_count(data),
             memory_bytes=mem_bytes,
         )
@@ -200,24 +201,6 @@ class JSONStore:
         elif isinstance(value, list):
             total += sum(sys.getsizeof(item) for item in value)
         return total
-
-    @staticmethod
-    def _json_type_name(value: Any) -> str:
-        """Map a Python value to a JSON type name."""
-        if isinstance(value, dict):
-            return "object"
-        if isinstance(value, list):
-            return "array"
-        if isinstance(value, str):
-            return "string"
-        if isinstance(value, bool):
-            # bool check MUST come before int — bool is a subclass of int in Python
-            return "boolean"
-        if isinstance(value, (int, float)):
-            return "number"
-        if value is None:
-            return "null"
-        return "unknown"
 
     @staticmethod
     def _top_level_count(value: Any) -> int:

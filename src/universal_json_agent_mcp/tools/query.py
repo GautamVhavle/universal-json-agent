@@ -10,10 +10,9 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from jsonpath_ng.ext import parse as jsonpath_parse
-from jsonpath_ng.exceptions import JsonPathParserError
-
 from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.jsonpath_helpers import parse_jsonpath
+from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, validate_operator
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
@@ -32,10 +31,7 @@ def jsonpath_query(store: JSONStore, alias: str, expression: str) -> str:
     """
     data = store.get(alias)
 
-    try:
-        jp = jsonpath_parse(expression)
-    except (JsonPathParserError, Exception) as exc:
-        raise ValueError(f"Invalid JSONPath expression '{expression}': {exc}")
+    jp = parse_jsonpath(expression)
 
     matches = jp.find(data)
 
@@ -87,7 +83,7 @@ def filter_objects(
         raise TypeError(f"Value at path '{path}' is {type(target).__name__}, expected an array.")
 
     _validate_operator(operator)
-    comparator = _OPERATORS[operator]
+    comparator = FILTER_OPERATORS[operator]
     results = []
 
     for item in target:
@@ -179,21 +175,5 @@ def _search_recursive(
 
 def _validate_operator(op: str) -> None:
     """Raise ValueError if the operator is not recognised."""
-    if op not in _OPERATORS:
-        raise ValueError(
-            f"Unknown operator '{op}'. "
-            f"Valid operators: {', '.join(_OPERATORS.keys())}"
-        )
+    validate_operator(op)
 
-
-# Operator dispatch table — keeps filter_objects clean (Open/Closed)
-_OPERATORS: dict[str, Any] = {
-    "eq":       lambda a, b: a == b,
-    "neq":      lambda a, b: a != b,
-    "gt":       lambda a, b: a > b,
-    "gte":      lambda a, b: a >= b,
-    "lt":       lambda a, b: a < b,
-    "lte":      lambda a, b: a <= b,
-    "contains": lambda a, b: isinstance(a, str) and isinstance(b, str) and b in a,
-    "regex":    lambda a, b: isinstance(a, str) and isinstance(b, str) and bool(re.search(b, a)),
-}

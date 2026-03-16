@@ -11,10 +11,8 @@ from __future__ import annotations
 import math
 from typing import Any
 
-from jsonpath_ng.ext import parse as jsonpath_parse
-from jsonpath_ng.exceptions import JsonPathParserError
-
 from universal_json_agent_mcp.store import JSONStore
+from universal_json_agent_mcp.utils.jsonpath_helpers import extract_numbers
 
 
 def describe(store: JSONStore, alias: str, expression: str) -> str:
@@ -33,7 +31,7 @@ def describe(store: JSONStore, alias: str, expression: str) -> str:
     Returns:
         A formatted statistical summary.
     """
-    nums = _extract_numbers(store, alias, expression)
+    nums = extract_numbers(store, alias, expression)
 
     if not nums:
         return f"No numeric values found for: {expression}"
@@ -70,22 +68,6 @@ def describe(store: JSONStore, alias: str, expression: str) -> str:
 # ------------------------------------------------------------------
 # Private helpers
 # ------------------------------------------------------------------
-
-
-def _extract_numbers(store: JSONStore, alias: str, expression: str) -> list[int | float]:
-    """Run a JSONPath query and return only int/float values (booleans excluded)."""
-    try:
-        parsed = jsonpath_parse(expression)
-    except (JsonPathParserError, Exception) as exc:
-        raise ValueError(f"Invalid JSONPath expression: {expression!r} — {exc}") from exc
-
-    data = store.get(alias)
-    matches = parsed.find(data)
-
-    return [
-        m.value for m in matches
-        if isinstance(m.value, (int, float)) and not isinstance(m.value, bool)
-    ]
 
 
 def _percentile(sorted_data: list[int | float], p: float) -> float:
