@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
   id-token: write   # Required for PyPI trusted publishing (OIDC)
@@ -42,11 +45,8 @@ jobs:
       - name: Set up Python
         run: uv python install 3.13
 
-      - name: Install build tools
-        run: uv pip install build hatch-vcs
-
       - name: Build package
-        run: uv run python -m build
+        run: uv build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
