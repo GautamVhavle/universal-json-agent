@@ -36,6 +36,7 @@ dev = [
 Homepage = "https://github.com/GautamVhavle/universal-json-agent"
 Repository = "https://github.com/GautamVhavle/universal-json-agent"
 Issues = "https://github.com/GautamVhavle/universal-json-agent/issues"
+Logo = "https://raw.githubusercontent.com/GautamVhavle/universal-json-agent/main/assets/logo.png"
 
 [project.scripts]
 universal-json-agent-mcp = "universal_json_agent_mcp.server:main"
