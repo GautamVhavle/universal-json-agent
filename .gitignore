@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables (contains secrets)
+.env
+
+# IDE / Editor
+.vscode/*
+!.vscode/mcp.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing / Coverage
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# uv
+uv.lock
+
+# Temp uploads from web server
+/tmp/json_agent_uploads/
+
+# Misc
+*.log

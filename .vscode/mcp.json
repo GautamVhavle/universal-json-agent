@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "json-agent": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "${workspaceFolder}",
+        "run",
+        "python",
+        "-m",
+        "json_agent.server"
+      ]
+    }
+  }
+}
