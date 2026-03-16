@@ -34,75 +34,40 @@ pip install universal-json-agent-mcp
 
 [**Getting Started**](#-getting-started) &nbsp;&middot;&nbsp; [**26 Tools**](#-tools-reference) &nbsp;&middot;&nbsp; [**Web API**](#-web-api-server) &nbsp;&middot;&nbsp; [**Development**](#-development)
 
-<br />
-
 </div>
 
 ---
 
-<br />
+## Why?
 
-## 💡 Why?
+Working with JSON shouldn't require writing a script every time. This tool lets you ask questions in plain English and get answers instantly.
 
-Working with JSON shouldn't require writing a script every time. **Universal JSON Agent MCP** lets you ask questions in plain English and get answers instantly.
+<div align="center">
 
-<table>
-<tr>
-<td width="50%">
+```
+You:  What's the total budget across all missions?
 
-**Without this tool**
-```python
-import json
-
-with open("missions.json") as f:
-    data = json.load(f)
-
-total = sum(
-    m["budget_credits"]
-    for m in data["missions"]
-)
-print(f"Total: {total}")
+AI:   The total budget across all missions is $18,250,000,000.50
+      (Used tools: load_json → sum_values)
 ```
 
-</td>
-<td width="50%">
-
-**With this tool**
-```
-You:  What's the total budget
-      across all missions?
-
-AI:   The total budget is
-      $18,250,000,000.50
-```
-
-</td>
-</tr>
-</table>
-
-<br />
+</div>
 
 ### Supported Clients
 
 <div align="center">
 
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="28" /> | <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg" width="28" /> | <img src="https://www.cursor.com/favicon.ico" width="28" /> | Any MCP Client |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="28" /> | <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/claude-ai-icon.png" width="28" /> | <img src="https://www.cursor.com/favicon.ico" width="28" /> | Any MCP Client |
 |:---:|:---:|:---:|:---:|
-| **VS Code / Copilot** | **Claude Desktop** | **Cursor** | **stdio** |
+| VS Code / Copilot | Claude Desktop | Cursor | stdio |
 
 </div>
 
-<br />
-
 ---
-
-<br />
 
 ## ⚡ Getting Started
 
 ### 1. Install
-
-Choose your preferred method:
 
 ```bash
 pip install universal-json-agent-mcp     # pip
@@ -113,9 +78,7 @@ uvx universal-json-agent-mcp             # zero-install, runs instantly
 ### 2. Configure your editor
 
 <details open>
-<summary><b>&nbsp;📘&nbsp; VS Code / GitHub Copilot</b></summary>
-
-<br />
+<summary><b>VS Code / GitHub Copilot</b></summary>
 
 Create `.vscode/mcp.json` in your workspace:
 
@@ -135,9 +98,7 @@ Create `.vscode/mcp.json` in your workspace:
 </details>
 
 <details>
-<summary><b>&nbsp;🟠&nbsp; Claude Desktop</b></summary>
-
-<br />
+<summary><b>Claude Desktop</b></summary>
 
 Add to `claude_desktop_config.json`:
 
@@ -154,9 +115,7 @@ Add to `claude_desktop_config.json`:
 </details>
 
 <details>
-<summary><b>&nbsp;🟣&nbsp; Cursor</b></summary>
-
-<br />
+<summary><b>Cursor</b></summary>
 
 Add to your Cursor MCP settings:
 
@@ -173,9 +132,7 @@ Add to your Cursor MCP settings:
 </details>
 
 <details>
-<summary><b>&nbsp;⌨️&nbsp; CLI / Standalone</b></summary>
-
-<br />
+<summary><b>CLI / Standalone</b></summary>
 
 ```bash
 universal-json-agent-mcp
@@ -198,20 +155,11 @@ Starts on **stdio** — pipe any MCP client into it.
 > Export the filtered results to CSV
 ```
 
-Your AI handles the rest — no code required.
-
-<br />
-
 ---
-
-<br />
 
 ## 🛠 Tools Reference
 
-<table>
-<tr><td>
-
-### 📂 &nbsp;Load & Manage
+### Load & Manage
 
 | Tool | What it does |
 |:-----|:-------------|
@@ -219,10 +167,7 @@ Your AI handles the rest — no code required.
 | `list_loaded` | List all loaded documents with metadata |
 | `unload_json` | Remove a document from memory |
 
-</td></tr>
-<tr><td>
-
-### 🔍 &nbsp;Explore
+### Explore
 
 | Tool | What it does |
 |:-----|:-------------|
@@ -231,10 +176,7 @@ Your AI handles the rest — no code required.
 | `get_type` | Return the JSON type at a path |
 | `get_structure` | Schema-like skeleton — keys, types, nesting |
 
-</td></tr>
-<tr><td>
-
-### 🎯 &nbsp;Query
+### Query
 
 | Tool | What it does |
 |:-----|:-------------|
@@ -242,10 +184,7 @@ Your AI handles the rest — no code required.
 | `filter_objects` | Filter by condition: `eq`, `gt`, `lt`, `contains`, `regex`… |
 | `search_text` | Full-text search across all string values |
 
-</td></tr>
-<tr><td>
-
-### 📊 &nbsp;Aggregate
+### Aggregate
 
 | Tool | What it does |
 |:-----|:-------------|
@@ -255,10 +194,7 @@ Your AI handles the rest — no code required.
 | `unique_values` | Distinct values at a JSONPath |
 | `value_counts` | Frequency table — like pandas `value_counts()` |
 
-</td></tr>
-<tr><td>
-
-### 🔄 &nbsp;Transform
+### Transform
 
 | Tool | What it does |
 |:-----|:-------------|
@@ -268,10 +204,7 @@ Your AI handles the rest — no code required.
 | `sort_by` | Sort objects by a field |
 | `sample` | Random N items from an array |
 
-</td></tr>
-<tr><td>
-
-### 📈 &nbsp;Analytics
+### Analytics
 
 | Tool | What it does |
 |:-----|:-------------|
@@ -279,39 +212,24 @@ Your AI handles the rest — no code required.
 | `multi_filter` | Compound filters with AND / OR logic |
 | `compare` | Diff two values — added, removed, changed keys |
 
-</td></tr>
-<tr><td>
-
-### 💾 &nbsp;Export
+### Export
 
 | Tool | What it does |
 |:-----|:-------------|
 | `export_csv` | Export array of objects to CSV file |
 | `export_json` | Export a value to a new JSON file |
 
-</td></tr>
-<tr><td>
-
-### 🗺 &nbsp;Introspect
+### Introspect
 
 | Tool | What it does |
 |:-----|:-------------|
 | `distinct_paths` | List every unique leaf path with types |
 
-</td></tr>
-</table>
-
-<br />
-
 ---
-
-<br />
 
 ## 🌐 Web API Server
 
-> **Optional.** A standalone **FastAPI + LangChain** REST API wrapping all 26 tools — useful for integrations, dashboards, or non-MCP workflows.
-
-### Quick Start
+> Optional **FastAPI + LangChain** REST API wrapping all 26 tools — for integrations, dashboards, or non-MCP workflows.
 
 ```bash
 pip install -r web/requirements.txt      # install deps
@@ -319,7 +237,7 @@ cp .env.example .env                     # add your OpenRouter key
 python -m web.run --port 8000            # start server
 ```
 
-### API Endpoints
+### Endpoints
 
 | Method | Endpoint | Description |
 |:------:|:---------|:------------|
@@ -328,7 +246,7 @@ python -m web.run --port 8000            # start server
 | `POST` | `/query/path` | Reference a file on disk + ask a question |
 | `GET` | `/docs` | Interactive Swagger UI |
 
-### Example Request
+### Example
 
 ```bash
 curl -X POST http://localhost:8000/query \
@@ -350,103 +268,77 @@ curl -X POST http://localhost:8000/query \
 | `OPENROUTER_API_KEY` | ✅ | — | Your [OpenRouter](https://openrouter.ai/) API key |
 | `OPENROUTER_MODEL` | — | `openai/gpt-4o-mini` | Any [supported model](https://openrouter.ai/models) |
 
-<br />
-
 ---
-
-<br />
 
 ## 🏗 Project Structure
 
 ```
 universal-json-agent/
 │
-├── src/universal_json_agent_mcp/   # 📦 MCP Server (pip-installable)
-│   ├── server.py                   #    FastMCP entry point — 26 tools
-│   ├── store.py                    #    In-memory JSON document store
+├── src/universal_json_agent_mcp/   # MCP Server (pip-installable)
+│   ├── server.py                   #   FastMCP entry point — 26 tools
+│   ├── store.py                    #   In-memory JSON document store
 │   ├── tools/
-│   │   ├── load.py                 #    load · list · unload
-│   │   ├── explore.py              #    keys · value · type · structure
-│   │   ├── query.py                #    jsonpath · filter · search
-│   │   ├── aggregate.py            #    count · sum · min/max · unique · value_counts
-│   │   ├── transform.py            #    flatten · pick · group · sort · sample
-│   │   ├── stats.py                #    describe
-│   │   ├── advanced_query.py       #    multi_filter · compare
-│   │   ├── export.py               #    CSV · JSON export
-│   │   └── introspect.py           #    distinct_paths
+│   │   ├── load.py                 #   load · list · unload
+│   │   ├── explore.py              #   keys · value · type · structure
+│   │   ├── query.py                #   jsonpath · filter · search
+│   │   ├── aggregate.py            #   count · sum · min/max · unique · value_counts
+│   │   ├── transform.py            #   flatten · pick · group · sort · sample
+│   │   ├── stats.py                #   describe
+│   │   ├── advanced_query.py       #   multi_filter · compare
+│   │   ├── export.py               #   CSV · JSON export
+│   │   └── introspect.py           #   distinct_paths
 │   └── utils/
-│       ├── path_resolver.py        #    Dot/bracket path navigation
-│       └── truncation.py           #    Smart output truncation
+│       ├── path_resolver.py        #   Dot/bracket path navigation
+│       └── truncation.py           #   Smart output truncation
 │
-├── web/                            # 🌐 FastAPI + LangChain server
-├── tests/                          # ✅ 489 tests
-├── assets/                         # 🎨 Logo & media
-├── pyproject.toml                  #    Package config & metadata
-├── LICENSE                         #    MIT
+├── web/                            #   FastAPI + LangChain server
+├── tests/                          #   489 tests
+├── assets/                         #   Logo & media
+├── pyproject.toml
+├── LICENSE                         #   MIT
 └── README.md
 ```
 
-<br />
-
 ---
-
-<br />
 
 ## 🧑‍💻 Development
 
 ```bash
-# Clone the repo
 git clone https://github.com/GautamVhavle/universal-json-agent.git
 cd universal-json-agent
-
-# Install with dev dependencies
 uv sync --extra dev
-
-# Run the full test suite (489 tests)
-uv run pytest
+uv run pytest                            # 489 tests
 ```
 
 <details>
 <summary><b>More test commands</b></summary>
 
-<br />
-
 ```bash
-# Verbose output
-uv run pytest -v
-
-# Run one test file
-uv run pytest tests/test_tools/test_aggregate.py
-
-# Run tests matching a pattern
-uv run pytest -k "test_filter"
+uv run pytest -v                                        # verbose
+uv run pytest tests/test_tools/test_aggregate.py        # one file
+uv run pytest -k "test_filter"                          # by pattern
 ```
 
 </details>
 
-### 🚀 Releasing
+### Releasing
 
-Releases are **fully automated** via GitHub Actions:
+Releases are fully automated via GitHub Actions:
 
+```bash
+git tag v0.3.0 -m "v0.3.0"
+git push origin v0.3.0
 ```
-git tag v0.3.0 -m "v0.3.0"       # create a version tag
-git push origin v0.3.0            # push the tag
-```
 
-Then [create a GitHub Release](https://github.com/GautamVhavle/universal-json-agent/releases/new) → CI runs tests → builds → publishes to PyPI. Done.
-
-<br />
+Then [create a GitHub Release](https://github.com/GautamVhavle/universal-json-agent/releases/new) for the tag — CI runs tests, builds, and publishes to PyPI.
 
 ---
 
-<br />
-
-## ❓ Troubleshooting
+## Troubleshooting
 
 <details>
 <summary><b>MCP server not appearing in Copilot / Claude / Cursor</b></summary>
-
-<br />
 
 1. Verify the config file exists (`.vscode/mcp.json` for VS Code)
 2. Check the command is on your PATH: `which universal-json-agent-mcp`
@@ -457,8 +349,6 @@ Then [create a GitHub Release](https://github.com/GautamVhavle/universal-json-ag
 <details>
 <summary><b>"No document loaded" errors</b></summary>
 
-<br />
-
 You need to load a file first. Ask your AI: *"Load the file data/example.json"* — this calls `load_json` behind the scenes.
 
 </details>
@@ -466,16 +356,12 @@ You need to load a file first. Ask your AI: *"Load the file data/example.json"* 
 <details>
 <summary><b>Truncated output</b></summary>
 
-<br />
-
-Large results are capped at ~10 KB to keep responses fast. Use more specific paths, filters, or `pick_fields` to narrow results.
+Large results are capped at ~10 KB. Use more specific paths, filters, or `pick_fields` to narrow results.
 
 </details>
 
 <details>
 <summary><b>429 Too Many Requests (web server)</b></summary>
-
-<br />
 
 The model provider is rate-limiting you. Wait a moment or switch to a different model in your `.env` file.
 
@@ -484,34 +370,16 @@ The model provider is rate-limiting you. Wait a moment or switch to a different 
 <details>
 <summary><b>Import errors in web server</b></summary>
 
-<br />
-
 ```bash
 pip install -r web/requirements.txt
 ```
 
 </details>
 
-<br />
-
 ---
-
-<br />
 
 <div align="center">
 
-### 📄 License
-
-[MIT](LICENSE) — free for personal and commercial use.
-
-<br />
-
-**Built by [Gautam Vhavle](https://github.com/GautamVhavle)**
-
-<br />
-
-If this project helped you, consider giving it a ⭐
-
-<br />
+[MIT License](LICENSE) · Built by [Gautam Vhavle](https://github.com/GautamVhavle) · Star this repo if it helped you ⭐
 
 </div>
