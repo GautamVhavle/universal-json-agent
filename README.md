@@ -2,7 +2,7 @@
 
 <br />
 
-<img src="assets/logo.png" alt="Universal JSON Agent MCP" width="180" />
+<img src="https://raw.githubusercontent.com/GautamVhavle/universal-json-agent/main/assets/logo.png" alt="Universal JSON Agent MCP" width="180" />
 
 <br />
 
