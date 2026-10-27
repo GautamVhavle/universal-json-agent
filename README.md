@@ -18,6 +18,8 @@
 &nbsp;
 [![Python](https://img.shields.io/pypi/pyversions/universal-json-agent-mcp?style=for-the-badge&logo=python&logoColor=white)](https://pypi.org/project/universal-json-agent-mcp/)
 &nbsp;
+[![MCP Badge](https://lobehub.com/badge/mcp/gautamvhavle-universal-json-agent?style=for-the-badge)](https://lobehub.com/mcp/gautamvhavle-universal-json-agent)
+&nbsp;
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 &nbsp;
 [![CI](https://img.shields.io/github/actions/workflow/status/GautamVhavle/universal-json-agent/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/GautamVhavle/universal-json-agent/actions/workflows/ci.yml)
