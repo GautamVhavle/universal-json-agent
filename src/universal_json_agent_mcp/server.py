@@ -44,8 +44,14 @@ store = JSONStore()
 mcp = FastMCP(
     "universal-json-agent",
     instructions=(
-        "Advanced JSON parsing agent. Load any JSON file and query its "
-        "structure, values, keys, counts, and more."
+        "Advanced JSON parsing agent. Call load_json before any other tool. "
+        "Use get_structure or distinct_paths to learn the shape, then answer "
+        "with one bulk call: jsonpath_query (for example $.items[*].field), "
+        "pick_fields, filter_objects, or an aggregate tool "
+        "(count, sum_values, min_max, value_counts, describe). "
+        "Do not loop get_value over array indexes. "
+        "Large results are truncated; narrow the path when output is cut off. "
+        "Pass replace=true to load_json to reload an alias already in memory."
     ),
 )
 

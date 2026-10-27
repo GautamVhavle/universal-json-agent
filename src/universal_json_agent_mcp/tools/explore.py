@@ -15,6 +15,9 @@ from universal_json_agent_mcp.utils.json_types import json_type_name
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_value
 
+# Cap wide objects so a single tool call cannot fill the model context.
+_MAX_KEYS_SHOWN = 100
+
 
 def get_keys(store: JSONStore, alias: str, path: str = "") -> str:
     """
@@ -35,10 +38,17 @@ def get_keys(store: JSONStore, alias: str, path: str = "") -> str:
 
     if isinstance(target, dict):
         keys = list(target.keys())
-        return f"Object with {len(keys)} keys:\n" + "\n".join(f"  - {k}" for k in keys)
+        shown = keys[:_MAX_KEYS_SHOWN]
+        lines = [f"Object with {len(keys)} keys:"]
+        lines.extend(f"  - {key}" for key in shown)
+        if len(keys) > _MAX_KEYS_SHOWN:
+            lines.append(f"  ... {len(keys) - _MAX_KEYS_SHOWN} more keys")
+        return truncate_value("\n".join(lines))
 
     if isinstance(target, list):
         length = len(target)
+        if length == 0:
+            return "Array with 0 items"
         return f"Array with {length} items (indices 0..{length - 1})"
 
     return f"Value at '{path}' is a {type(target).__name__}, not an object or array. No keys available."
@@ -109,7 +119,7 @@ def get_structure(
     data = store.get(alias)
     target = resolve_path(data, path)
     tree = _build_structure(target, depth=0, max_depth=max_depth)
-    return tree
+    return truncate_value(tree)
 
 
 # ------------------------------------------------------------------
@@ -137,8 +147,14 @@ def _build_structure(value: Any, *, depth: int, max_depth: int, indent: int = 0)
         if depth >= max_depth:
             return f"{prefix}{header}  [depth limit reached]"
 
+        items = list(value.items())
+        hidden = 0
+        if len(items) > _MAX_KEYS_SHOWN:
+            hidden = len(items) - _MAX_KEYS_SHOWN
+            items = items[:_MAX_KEYS_SHOWN]
+
         lines = [f"{prefix}{header}"]
-        for key, val in value.items():
+        for key, val in items:
             child = _build_structure(val, depth=depth + 1, max_depth=max_depth, indent=indent + 1)
             # If child is a single-line scalar, inline it
             if "\n" not in child:
@@ -146,6 +162,8 @@ def _build_structure(value: Any, *, depth: int, max_depth: int, indent: int = 0)
             else:
                 lines.append(f"{prefix}  {key}:")
                 lines.append(child)
+        if hidden:
+            lines.append(f"{prefix}  ... {hidden} more keys")
         return "\n".join(lines)
 
     if isinstance(value, list):

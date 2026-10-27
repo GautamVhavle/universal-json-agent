@@ -158,3 +158,10 @@ class TestDistinctPaths:
         s = _load_data(store, None)
         result = distinct_paths(s, "d")
         assert "null" in result
+
+    def test_caps_wide_object(self, store: JSONStore) -> None:
+        s = _load_data(store, {f"k{i}": i for i in range(201)})
+        result = distinct_paths(s, "d")
+        assert "201 unique" in result
+        assert "1 more paths" in result
+        assert "$.k200" not in result

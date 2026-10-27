@@ -12,18 +12,19 @@ def register(mcp: FastMCP, store: JSONStore) -> dict:
     """Register load/unload/list tools and return them."""
 
     @mcp.tool()
-    def load_json(file_path: str, alias: str | None = None) -> str:
+    def load_json(file_path: str, alias: str | None = None, replace: bool = False) -> str:
         """Load a JSON file from disk into memory.
 
         Args:
             file_path: Absolute or relative path to the JSON file.
             alias: Optional friendly name for the document (defaults to filename stem).
+            replace: Set true to reload an alias that is already loaded.
 
         Returns:
             Summary of the loaded document including type, size, and item count.
         """
         try:
-            return load_tools.load_json(store, file_path, alias)
+            return load_tools.load_json(store, file_path, alias, replace)
         except (FileNotFoundError, ValueError, Exception) as exc:
             return f"Error: {exc}"
 

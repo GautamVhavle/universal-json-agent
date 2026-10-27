@@ -11,6 +11,9 @@ from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.utils.truncation import truncate_value
+
+_MAX_PATHS_SHOWN = 200
 
 
 def distinct_paths(
@@ -49,11 +52,19 @@ def distinct_paths(
         type_name = _json_type(target)
         return f"Single {type_name} value at '{prefix}' — no nested paths."
 
-    lines = [f"Discovered {len(found)} unique path(s) from '{prefix}'", ""]
-    for p, t in found.items():
-        lines.append(f"  {p}  →  {t}")
+    pairs = list(found.items())
+    hidden = 0
+    if len(pairs) > _MAX_PATHS_SHOWN:
+        hidden = len(pairs) - _MAX_PATHS_SHOWN
+        pairs = pairs[:_MAX_PATHS_SHOWN]
 
-    return "\n".join(lines)
+    lines = [f"Discovered {len(found)} unique path(s) from '{prefix}'", ""]
+    for p, t in pairs:
+        lines.append(f"  {p}  →  {t}")
+    if hidden:
+        lines.append(f"\n... {hidden} more paths")
+
+    return truncate_value("\n".join(lines))
 
 
 # ------------------------------------------------------------------

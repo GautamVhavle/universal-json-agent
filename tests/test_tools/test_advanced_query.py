@@ -266,6 +266,14 @@ class TestCompare:
         ])
         assert "x eq 1" in result
 
+    def test_multi_filter_coerces_numeric_string(self, store: JSONStore) -> None:
+        s = _load_data(store, {"items": [{"n": 10}, {"n": 50}, {"n": None}]})
+        result = multi_filter(s, "d", "items", [
+            {"field": "n", "operator": "gt", "value": "20"},
+        ])
+        assert "Matched 1 of 3" in result
+        assert "value type does not match" in result
+
     def test_compare_diffs_capped_at_100(self, store: JSONStore) -> None:
         """More than 100 differences should be capped."""
         obj_a = {f"k{i}": i for i in range(150)}
@@ -296,3 +304,15 @@ class TestCompare:
         assert "CHANGED" in result
         assert "'hello'" in result
         assert "'world'" in result
+
+    def test_compare_depth_limit(self, store: JSONStore) -> None:
+        def _nest(value: str) -> dict:
+            node: object = value
+            for _ in range(105):
+                node = {"n": node}
+            return node  # type: ignore[return-value]
+
+        s = _load_data(store, {"a": _nest("old"), "b": _nest("new")})
+        result = compare(s, "d", path_a="a", path_b="b")
+        assert "DEPTH" in result
+        assert "old" not in result

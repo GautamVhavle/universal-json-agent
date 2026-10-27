@@ -71,10 +71,11 @@ def build_tools(store: JSONStore) -> list[StructuredTool]:
             description=(
                 "Load a JSON file from disk into memory. "
                 "Returns a summary with alias, type, size, and item count. "
-                "You MUST call this first before using any other tool."
+                "You MUST call this first before using any other tool. "
+                "Pass replace=true to reload an alias that is already loaded."
             ),
-            func=lambda file_path, alias=None: _safe(
-                load_mod.load_json, file_path, alias
+            func=lambda file_path, alias=None, replace=False: _safe(
+                load_mod.load_json, file_path, alias, replace
             ),
             args_schema=LoadJsonInput,
         ),

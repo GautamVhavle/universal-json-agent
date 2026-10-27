@@ -201,6 +201,28 @@ class TestFilterObjects:
         ]})
         result = filter_objects(s, "d", "items", "val", "gt", 50)
         assert "1 of 2" in result
+        assert "1 skipped — value type does not match" in result
+
+    def test_gt_coerces_numeric_string(self, store: JSONStore) -> None:
+        """A numeric string from the model compares against a JSON number."""
+        s = _load_data(store, {"items": [
+            {"n": 10},
+            {"n": 50},
+            {"n": None},
+        ]})
+        result = filter_objects(s, "d", "items", "n", "gt", "20")
+        assert "1 of 3" in result
+        assert '"n": 50' in result
+        assert "1 skipped — value type does not match" in result
+
+        s = _load_data(store, {"rows": [
+            {"n": "10"},
+            {"n": "50"},
+            {"n": "nope"},
+        ]}, alias="nums")
+        result = filter_objects(s, "nums", "rows", "n", "gt", 20)
+        assert "1 of 3" in result
+        assert "1 skipped — value type does not match" in result
 
     def test_filter_on_root_array(self, store: JSONStore) -> None:
         s = _load_data(store, [{"x": 1}, {"x": 2}, {"x": 3}])
@@ -313,6 +335,7 @@ class TestSearchText:
         # The comparison lambda catches re.error from invalid regex
         result = filter_objects(s, "d", "items", "code", "regex", "[invalid(")
         assert "0 of 2" in result
+        assert "invalid regex" in result
 
     def test_filter_contains_non_string_field_skips(self, store: JSONStore) -> None:
         """'contains' on a non-string field returns False (no crash)."""
@@ -351,3 +374,12 @@ class TestSearchText:
         result = search_text(s, "d", "dark", path="config")
         assert "config" in result
         assert "theme" in result
+
+    def test_search_depth_limit(self, store: JSONStore) -> None:
+        node: object = "needle"
+        for _ in range(105):
+            node = {"n": node}
+        s = _load_data(store, node)
+        result = search_text(s, "d", "needle")
+        assert "No matches" in result
+        assert "depth limit reached" in result

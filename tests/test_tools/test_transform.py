@@ -420,6 +420,15 @@ class TestFlattenListMixed:
         assert "items[1]" in result
         assert "items[2].b" in result
 
+    def test_flatten_depth_limit(self, store: JSONStore) -> None:
+        node: object = {"leaf": 1}
+        for _ in range(105):
+            node = {"n": node}
+        s = _load_data(store, node)
+        result = flatten(s, "d")
+        assert "max depth reached" in result
+        assert "leaf" not in result
+
 
 class TestSortMixedDescending:
     def test_sort_mixed_types_descending_fallback(self, store: JSONStore) -> None:

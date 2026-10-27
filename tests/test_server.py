@@ -436,3 +436,11 @@ class TestServerLoadEdgeCases:
         result = server.load_json(path, alias="dup_test")
         os.unlink(path)
         assert result.startswith("Error:")
+
+    def test_load_replace_alias(self) -> None:
+        path = _write_json({"items": [1, 2, 3]})
+        server.load_json(path, alias="replace_me")
+        result = server.load_json(path, alias="replace_me", replace=True)
+        os.unlink(path)
+        assert result.startswith("Loaded 'replace_me'")
+        assert "object" in result

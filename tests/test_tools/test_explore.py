@@ -61,7 +61,7 @@ class TestGetKeys:
     def test_empty_array_keys(self, store: JSONStore) -> None:
         s = _load_data(store, [])
         result = get_keys(s, "d")
-        assert "0 items" in result
+        assert result == "Array with 0 items"
 
     def test_boolean_scalar(self, store: JSONStore) -> None:
         s = _load_data(store, {"flag": True})
@@ -325,3 +325,16 @@ class TestGetStructure:
         assert "outer:" in result
         assert "inner:" in result
         assert "string" in result
+
+    def test_get_keys_caps_wide_object(self, store: JSONStore) -> None:
+        s = _load_data(store, {f"k{i}": i for i in range(101)})
+        result = get_keys(s, "d")
+        assert "101 keys" in result
+        assert "1 more keys" in result
+        assert "k100" not in result
+
+    def test_structure_caps_wide_object(self, store: JSONStore) -> None:
+        s = _load_data(store, {f"k{i}": i for i in range(101)})
+        result = get_structure(s, "d")
+        assert "1 more keys" in result
+        assert "k100" not in result

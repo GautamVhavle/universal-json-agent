@@ -37,6 +37,13 @@ class TestLoad:
         with pytest.raises(ValueError, match="already in use"):
             store.load(json_file, alias="dup")
 
+    def test_load_replace_overwrites(self, store: JSONStore, json_file: str, array_json_file: str) -> None:
+        store.load(json_file, alias="dup")
+        meta = store.load(array_json_file, alias="dup", replace=True)
+        assert meta.root_type == "array"
+        assert meta.top_level_count == 5
+        assert isinstance(store.get("dup"), list)
+
     def test_load_file_not_found(self, store: JSONStore) -> None:
         with pytest.raises(FileNotFoundError):
             store.load("/nonexistent/path/data.json")

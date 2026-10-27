@@ -12,7 +12,7 @@ import re
 from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
-from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, VALID_OPERATOR_NAMES
+from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, VALID_OPERATOR_NAMES, skip_note
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
@@ -79,6 +79,8 @@ def multi_filter(
         )
 
     results = []
+    type_skipped = 0
+    regex_skipped = 0
     for item in target:
         if not isinstance(item, dict):
             continue
@@ -89,7 +91,11 @@ def multi_filter(
                 continue
             try:
                 matches.append(bool(comparator(item[field], value)))
-            except (TypeError, re.error):
+            except TypeError:
+                type_skipped += 1
+                matches.append(False)
+            except re.error:
+                regex_skipped += 1
                 matches.append(False)
 
         if mode_lower == "and" and all(matches):
@@ -101,6 +107,7 @@ def multi_filter(
         f"{c['field']} {c['operator']} {c['value']!r}" for c in conditions
     )
     header = f"Matched {len(results)} of {len(target)} items  ({cond_desc})"
+    header += skip_note(type_skipped=type_skipped, regex_skipped=regex_skipped)
     if not results:
         return header
     return header + "\n" + truncate_list(results)
@@ -144,7 +151,7 @@ def compare(
     val_b = resolve_path(data_b, path_b)
 
     diffs: list[str] = []
-    _diff_recursive(val_a, val_b, path="$", diffs=diffs, max_diffs=100)
+    _diff_recursive(val_a, val_b, path="$", diffs=diffs, max_diffs=100, depth=0)
 
     if not diffs:
         return "No differences found."
@@ -166,9 +173,15 @@ def _diff_recursive(
     path: str,
     diffs: list[str],
     max_diffs: int,
+    depth: int = 0,
+    max_depth: int = 100,
 ) -> None:
     """Walk two values and record differences into *diffs*."""
     if len(diffs) >= max_diffs:
+        return
+    if depth > max_depth:
+        if a != b:
+            diffs.append(f"  DEPTH  {path}: nested deeper than {max_depth} levels")
         return
 
     type_a = type(a).__name__
@@ -192,7 +205,7 @@ def _diff_recursive(
                 return
             diffs.append(f"  ADDED   {path}.{key}")
         for key in sorted(keys_a & keys_b):
-            _diff_recursive(a[key], b[key], f"{path}.{key}", diffs, max_diffs)
+            _diff_recursive(a[key], b[key], f"{path}.{key}", diffs, max_diffs, depth + 1, max_depth)
         return
 
     # Both lists
@@ -200,7 +213,7 @@ def _diff_recursive(
         if len(a) != len(b):
             diffs.append(f"  LENGTH {path}: {len(a)} → {len(b)}")
         for i in range(min(len(a), len(b))):
-            _diff_recursive(a[i], b[i], f"{path}[{i}]", diffs, max_diffs)
+            _diff_recursive(a[i], b[i], f"{path}[{i}]", diffs, max_diffs, depth + 1, max_depth)
         return
 
     # Scalars

@@ -78,13 +78,14 @@ class JSONStore:
     # Public API
     # ------------------------------------------------------------------
 
-    def load(self, file_path: str, alias: str | None = None) -> DocumentMeta:
+    def load(self, file_path: str, alias: str | None = None, replace: bool = False) -> DocumentMeta:
         """
         Load a JSON file into the store.
 
         Args:
             file_path: Absolute or relative path to the JSON file.
             alias: Optional friendly name. Defaults to the file stem (e.g. "orders").
+            replace: When True, replace a document already stored under *alias*.
 
         Returns:
             DocumentMeta with summary information about the loaded document.
@@ -92,7 +93,7 @@ class JSONStore:
         Raises:
             FileNotFoundError: If the file does not exist.
             json.JSONDecodeError: If the file is not valid JSON.
-            ValueError: If the alias is already in use.
+            ValueError: If the alias is already in use and *replace* is False.
         """
         path = Path(file_path).expanduser().resolve()
         if not path.is_file():
@@ -101,10 +102,12 @@ class JSONStore:
         alias = alias or path.stem
 
         if alias in self._documents:
-            raise ValueError(
-                f"Alias '{alias}' is already in use. "
-                f"Unload it first or choose a different alias."
-            )
+            if not replace:
+                raise ValueError(
+                    f"Alias '{alias}' is already in use. "
+                    f"Unload it first, pass replace=true, or choose a different alias."
+                )
+            del self._documents[alias]
 
         file_size = path.stat().st_size
         logger.info("Loading %s (%s bytes) as '%s'", path, file_size, alias)

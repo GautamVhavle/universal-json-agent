@@ -41,7 +41,7 @@ def flatten(store: JSONStore, alias: str, path: str = "", separator: str = ".") 
         )
 
     flat: dict[str, Any] = {}
-    _flatten_recursive(target, prefix="", separator=separator, result=flat)
+    _flatten_recursive(target, prefix="", separator=separator, result=flat, depth=0)
     return truncate_value(flat)
 
 
@@ -225,19 +225,25 @@ def _flatten_recursive(
     prefix: str,
     separator: str,
     result: dict[str, Any],
+    depth: int = 0,
+    max_depth: int = 100,
 ) -> None:
     """Recursively flatten a nested dict into *result*."""
+    if depth > max_depth:
+        result[prefix or "$"] = "<max depth reached>"
+        return
+
     for key, value in obj.items():
         full_key = f"{prefix}{separator}{key}" if prefix else key
 
         if isinstance(value, dict):
-            _flatten_recursive(value, full_key, separator, result)
+            _flatten_recursive(value, full_key, separator, result, depth + 1, max_depth)
         elif isinstance(value, list):
             # Flatten list items with index notation
             for idx, item in enumerate(value):
                 item_key = f"{full_key}[{idx}]"
                 if isinstance(item, dict):
-                    _flatten_recursive(item, item_key, separator, result)
+                    _flatten_recursive(item, item_key, separator, result, depth + 1, max_depth)
                 else:
                     result[item_key] = item
         else:

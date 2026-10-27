@@ -23,6 +23,10 @@ class LoadJsonInput(BaseModel):
         default=None,
         description="Friendly alias for the document (defaults to file stem).",
     )
+    replace: bool = Field(
+        default=False,
+        description="Replace the alias if a document is already loaded under it.",
+    )
 
 
 class AliasInput(BaseModel):

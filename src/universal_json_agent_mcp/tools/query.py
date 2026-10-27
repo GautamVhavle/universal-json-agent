@@ -12,7 +12,7 @@ from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
 from universal_json_agent_mcp.utils.jsonpath_helpers import parse_jsonpath
-from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, validate_operator
+from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, skip_note, validate_operator
 from universal_json_agent_mcp.utils.path_resolver import resolve_path
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
@@ -85,6 +85,8 @@ def filter_objects(
     _validate_operator(operator)
     comparator = FILTER_OPERATORS[operator]
     results = []
+    type_skipped = 0
+    regex_skipped = 0
 
     for item in target:
         if not isinstance(item, dict):
@@ -94,11 +96,13 @@ def filter_objects(
         try:
             if comparator(item[field], value):
                 results.append(item)
-        except (TypeError, re.error):
-            # Skip items where comparison doesn't make sense (e.g. comparing str > int)
-            continue
+        except TypeError:
+            type_skipped += 1
+        except re.error:
+            regex_skipped += 1
 
     header = f"Matched {len(results)} of {len(target)} items"
+    header += skip_note(type_skipped=type_skipped, regex_skipped=regex_skipped)
     if not results:
         return header
 
@@ -135,14 +139,21 @@ def search_text(
         raise ValueError(f"Invalid regex pattern '{pattern}': {exc}")
 
     hits: list[dict[str, str]] = []
-    _search_recursive(target, compiled, current_path=path or "$", hits=hits, max_hits=100)
+    depth_limited = _search_recursive(
+        target, compiled, current_path=path or "$", hits=hits, max_hits=100,
+    )
 
     if not hits:
-        return f"No matches found for pattern: {pattern}"
+        message = f"No matches found for pattern: {pattern}"
+        if depth_limited:
+            message += " (depth limit reached)"
+        return message
 
     header = f"Found {len(hits)} match(es) for '{pattern}'"
     if len(hits) >= 100:
         header += " (results capped at 100)"
+    if depth_limited:
+        header += " (depth limit reached)"
 
     return header + "\n" + truncate_list(hits)
 
@@ -157,20 +168,37 @@ def _search_recursive(
     current_path: str,
     hits: list[dict[str, str]],
     max_hits: int,
-) -> None:
-    """DFS through the JSON tree, collecting string values that match *pattern*."""
-    if len(hits) >= max_hits:
-        return
+    depth: int = 0,
+    max_depth: int = 100,
+) -> bool:
+    """DFS through the JSON tree, collecting string values that match *pattern*.
 
+    Returns True when a branch was stopped because it was deeper than *max_depth*.
+    """
+    if len(hits) >= max_hits:
+        return False
+    if depth > max_depth:
+        return True
+
+    limited = False
     if isinstance(value, str):
         if pattern.search(value):
             hits.append({"path": current_path, "value": value})
     elif isinstance(value, dict):
         for key, val in value.items():
-            _search_recursive(val, pattern, f"{current_path}.{key}", hits, max_hits)
+            if len(hits) >= max_hits:
+                break
+            limited = _search_recursive(
+                val, pattern, f"{current_path}.{key}", hits, max_hits, depth + 1, max_depth,
+            ) or limited
     elif isinstance(value, list):
         for idx, val in enumerate(value):
-            _search_recursive(val, pattern, f"{current_path}[{idx}]", hits, max_hits)
+            if len(hits) >= max_hits:
+                break
+            limited = _search_recursive(
+                val, pattern, f"{current_path}[{idx}]", hits, max_hits, depth + 1, max_depth,
+            ) or limited
+    return limited
 
 
 def _validate_operator(op: str) -> None:

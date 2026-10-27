@@ -10,7 +10,12 @@ from __future__ import annotations
 from universal_json_agent_mcp.store import JSONStore
 
 
-def load_json(store: JSONStore, file_path: str, alias: str | None = None) -> str:
+def load_json(
+    store: JSONStore,
+    file_path: str,
+    alias: str | None = None,
+    replace: bool = False,
+) -> str:
     """
     Load a JSON file from disk into the in-memory store.
 
@@ -18,11 +23,12 @@ def load_json(store: JSONStore, file_path: str, alias: str | None = None) -> str
         store: The shared JSONStore instance.
         file_path: Path to the JSON file on disk.
         alias: Optional friendly name (defaults to file stem).
+        replace: When True, replace a document already stored under this alias.
 
     Returns:
         A human-readable summary of the loaded document.
     """
-    meta = store.load(file_path, alias)
+    meta = store.load(file_path, alias, replace=replace)
     return (
         f"Loaded '{meta.alias}' from {meta.file_path}\n"
         f"  Type : {meta.root_type}\n"

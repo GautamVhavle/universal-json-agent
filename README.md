@@ -22,7 +22,7 @@
 &nbsp;
 [![CI](https://img.shields.io/github/actions/workflow/status/GautamVhavle/universal-json-agent/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/GautamVhavle/universal-json-agent/actions/workflows/ci.yml)
 &nbsp;
-[![Tests](https://img.shields.io/badge/tests-489%20passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)]()
+[![Tests](https://img.shields.io/badge/tests-499%20passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)]()
 
 <br />
 
@@ -256,7 +256,10 @@ curl -X POST http://localhost:8000/query \
 ```json
 {
   "answer": "The total budget across all missions is $18,250,000,000.50",
-  "tools_used": ["load_json", "sum_values"]
+  "steps": [
+    {"tool": "load_json", "output": "Loaded 'missions' from data/missions.json"},
+    {"tool": "sum_values", "output": "Sum: 18250000000.5  (from 4 values)"}
+  ]
 }
 ```
 
@@ -275,7 +278,7 @@ curl -X POST http://localhost:8000/query \
 git clone https://github.com/GautamVhavle/universal-json-agent.git
 cd universal-json-agent
 uv sync --extra dev
-uv run pytest                            # 489 tests
+uv run pytest                            # 499 tests
 ```
 
 <details>
