@@ -305,7 +305,7 @@ class TestCompare:
         assert "'hello'" in result
         assert "'world'" in result
 
-    def test_compare_depth_limit(self, store: JSONStore) -> None:
+    def test_compare_walks_past_100_levels(self, store: JSONStore) -> None:
         def _nest(value: str) -> dict:
             node: object = value
             for _ in range(105):
@@ -314,5 +314,18 @@ class TestCompare:
 
         s = _load_data(store, {"a": _nest("old"), "b": _nest("new")})
         result = compare(s, "d", path_a="a", path_b="b")
+        assert "CHANGED" in result
+        assert "old" in result
+        assert "new" in result
+
+    def test_compare_respects_max_depth(self, store: JSONStore) -> None:
+        def _nest(value: str) -> dict:
+            node: object = value
+            for _ in range(10):
+                node = {"n": node}
+            return node  # type: ignore[return-value]
+
+        s = _load_data(store, {"a": _nest("old"), "b": _nest("new")})
+        result = compare(s, "d", path_a="a", path_b="b", max_depth=2)
         assert "DEPTH" in result
         assert "old" not in result

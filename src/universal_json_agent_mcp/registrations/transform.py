@@ -12,22 +12,29 @@ def register(mcp: FastMCP, store: JSONStore) -> dict:
     """Register transform tools and return them."""
 
     @mcp.tool()
-    def flatten(alias: str, path: str = "", separator: str = ".") -> str:
+    def flatten(
+        alias: str,
+        path: str = "",
+        separator: str = ".",
+        max_depth: int | None = None,
+    ) -> str:
         """Flatten a nested JSON object into dot-notation key-value pairs.
 
         Converts nested structures like {"a": {"b": 1}} into {"a.b": 1}.
+        Walks as deep as Python allows unless max_depth is set.
 
         Args:
             alias: The alias of the loaded document.
             path: Dot-notation path to the object to flatten. Empty means root.
             separator: The separator for flattened keys (default ".").
+            max_depth: Stop after this many nested levels. Omit to walk the full safe depth.
 
         Returns:
             A flat mapping of dotted-path keys to their values.
         """
         try:
-            return transform_tools.flatten(store, alias, path, separator)
-        except (KeyError, TypeError, IndexError) as exc:
+            return transform_tools.flatten(store, alias, path, separator, max_depth)
+        except (KeyError, TypeError, IndexError, ValueError) as exc:
             return f"Error: {exc}"
 
     @mcp.tool()

@@ -375,11 +375,25 @@ class TestSearchText:
         assert "config" in result
         assert "theme" in result
 
-    def test_search_depth_limit(self, store: JSONStore) -> None:
+    def test_search_walks_past_100_levels(self, store: JSONStore) -> None:
         node: object = "needle"
         for _ in range(105):
             node = {"n": node}
         s = _load_data(store, node)
         result = search_text(s, "d", "needle")
+        assert "1 match" in result
+        assert "needle" in result
+
+    def test_search_respects_max_depth(self, store: JSONStore) -> None:
+        node: object = "needle"
+        for _ in range(10):
+            node = {"n": node}
+        s = _load_data(store, node)
+        result = search_text(s, "d", "needle", max_depth=2)
         assert "No matches" in result
         assert "depth limit reached" in result
+
+    def test_search_rejects_depth_past_recursion_limit(self, store: JSONStore) -> None:
+        s = _load_data(store, {"a": "x"})
+        with pytest.raises(ValueError, match="safely"):
+            search_text(s, "d", "x", max_depth=10_000)

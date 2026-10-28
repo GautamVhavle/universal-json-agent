@@ -13,7 +13,7 @@ from typing import Any
 from universal_json_agent_mcp.store import JSONStore
 from universal_json_agent_mcp.utils.jsonpath_helpers import parse_jsonpath
 from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, skip_note, validate_operator
-from universal_json_agent_mcp.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.utils.path_resolver import resolve_path, walk_limit
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
 
@@ -115,6 +115,7 @@ def search_text(
     pattern: str,
     path: str = "",
     case_sensitive: bool = False,
+    max_depth: int | None = None,
 ) -> str:
     """
     Recursively search all string values for a substring or regex pattern.
@@ -125,12 +126,14 @@ def search_text(
         pattern: A substring or regex pattern to search for.
         path: Optional starting path to narrow the search scope.
         case_sensitive: Whether matching is case-sensitive (default False).
+        max_depth: Levels to descend. Omit it to walk as deep as Python allows.
 
     Returns:
         A list of matching paths and their values.
     """
     data = store.get(alias)
     target = resolve_path(data, path)
+    limit = walk_limit(max_depth)
 
     flags = 0 if case_sensitive else re.IGNORECASE
     try:
@@ -141,6 +144,7 @@ def search_text(
     hits: list[dict[str, str]] = []
     depth_limited = _search_recursive(
         target, compiled, current_path=path or "$", hits=hits, max_hits=100,
+        max_depth=limit,
     )
 
     if not hits:
@@ -169,7 +173,7 @@ def _search_recursive(
     hits: list[dict[str, str]],
     max_hits: int,
     depth: int = 0,
-    max_depth: int = 100,
+    max_depth: int = 0,
 ) -> bool:
     """DFS through the JSON tree, collecting string values that match *pattern*.
 

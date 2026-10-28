@@ -152,8 +152,8 @@ def build_tools(store: JSONStore) -> list[StructuredTool]:
                 "Recursively search all string values for a substring or regex. "
                 "Best for finding a specific value without knowing its path."
             ),
-            func=lambda alias, pattern, path="", case_sensitive=False: _safe(
-                query_mod.search_text, alias, pattern, path, case_sensitive
+            func=lambda alias, pattern, path="", case_sensitive=False, max_depth=None: _safe(
+                query_mod.search_text, alias, pattern, path, case_sensitive, max_depth
             ),
             args_schema=SearchTextInput,
         ),
@@ -203,8 +203,8 @@ def build_tools(store: JSONStore) -> list[StructuredTool]:
         StructuredTool.from_function(
             name="flatten",
             description="Flatten a nested object into dot-notation key-value pairs.",
-            func=lambda alias, path="", separator=".": _safe(
-                transform_mod.flatten, alias, path, separator
+            func=lambda alias, path="", separator=".", max_depth=None: _safe(
+                transform_mod.flatten, alias, path, separator, max_depth
             ),
             args_schema=FlattenInput,
         ),
@@ -270,8 +270,8 @@ def build_tools(store: JSONStore) -> list[StructuredTool]:
                 "Compare two JSON values and report differences: "
                 "added/removed keys, type changes, value changes."
             ),
-            func=lambda alias_a, alias_b=None, path_a="", path_b="": _safe(
-                adv_mod.compare, alias_a, alias_b, path_a, path_b
+            func=lambda alias_a, alias_b=None, path_a="", path_b="", max_depth=None: _safe(
+                adv_mod.compare, alias_a, alias_b, path_a, path_b, max_depth
             ),
             args_schema=CompareInput,
         ),

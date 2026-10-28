@@ -64,12 +64,20 @@ class SearchTextInput(BaseModel):
     pattern: str = Field(description="Substring or regex to search for.")
     path: str = Field(default="", description="Starting path to narrow scope.")
     case_sensitive: bool = Field(default=False, description="Case-sensitive matching.")
+    max_depth: Optional[int] = Field(
+        default=None,
+        description="Nested levels to walk. Omit to go as deep as Python allows.",
+    )
 
 
 class FlattenInput(BaseModel):
     alias: str = Field(description="Alias of the loaded document.")
     path: str = Field(default="", description="Path to the object to flatten.")
     separator: str = Field(default=".", description="Key separator.")
+    max_depth: Optional[int] = Field(
+        default=None,
+        description="Nested levels to walk. Omit to go as deep as Python allows.",
+    )
 
 
 class PickFieldsInput(BaseModel):
@@ -118,6 +126,10 @@ class CompareInput(BaseModel):
     )
     path_a: str = Field(default="", description="Path in the first document.")
     path_b: str = Field(default="", description="Path in the second document.")
+    max_depth: Optional[int] = Field(
+        default=None,
+        description="Nested levels to walk. Omit to go as deep as Python allows.",
+    )
 
 
 class ExportCsvInput(BaseModel):

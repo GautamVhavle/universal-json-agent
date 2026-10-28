@@ -49,24 +49,29 @@ def register(mcp: FastMCP, store: JSONStore) -> dict:
         path_a: str = "",
         alias_b: str | None = None,
         path_b: str = "",
+        max_depth: int | None = None,
     ) -> str:
         """Compare two JSON values and report their differences.
 
         Can compare two paths within the same document or across two documents.
         Reports added keys, removed keys, type changes, and value changes.
+        Walks as deep as Python allows unless max_depth is set.
 
         Args:
             alias_a: The alias of the first document.
             path_a: Path to the first value (default root).
             alias_b: The alias of the second document (defaults to alias_a).
             path_b: Path to the second value (default root).
+            max_depth: Stop after this many nested levels. Omit to walk the full safe depth.
 
         Returns:
             A structured diff report listing all differences found.
         """
         try:
-            return adv_query_tools.compare(store, alias_a, alias_b, path_a, path_b)
-        except (KeyError, IndexError, TypeError) as exc:
+            return adv_query_tools.compare(
+                store, alias_a, alias_b, path_a, path_b, max_depth
+            )
+        except (KeyError, IndexError, TypeError, ValueError) as exc:
             return f"Error: {exc}"
 
     return {

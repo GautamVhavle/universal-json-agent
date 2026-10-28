@@ -11,11 +11,17 @@ import random
 from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
-from universal_json_agent_mcp.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.utils.path_resolver import resolve_path, walk_limit
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
 
-def flatten(store: JSONStore, alias: str, path: str = "", separator: str = ".") -> str:
+def flatten(
+    store: JSONStore,
+    alias: str,
+    path: str = "",
+    separator: str = ".",
+    max_depth: int | None = None,
+) -> str:
     """
     Flatten a nested JSON object into dot-notation key-value pairs.
 
@@ -27,12 +33,14 @@ def flatten(store: JSONStore, alias: str, path: str = "", separator: str = ".") 
         alias: The alias of the loaded document.
         path: Dot-notation path to the object to flatten. Empty means root.
         separator: The separator for flattened keys (default ".").
+        max_depth: Levels to descend. Omit it to walk as deep as Python allows.
 
     Returns:
         A flat mapping of dotted paths → values.
     """
     data = store.get(alias)
     target = resolve_path(data, path)
+    limit = walk_limit(max_depth)
 
     if not isinstance(target, dict):
         raise TypeError(
@@ -41,7 +49,7 @@ def flatten(store: JSONStore, alias: str, path: str = "", separator: str = ".") 
         )
 
     flat: dict[str, Any] = {}
-    _flatten_recursive(target, prefix="", separator=separator, result=flat, depth=0)
+    _flatten_recursive(target, prefix="", separator=separator, result=flat, depth=0, max_depth=limit)
     return truncate_value(flat)
 
 
@@ -226,7 +234,7 @@ def _flatten_recursive(
     separator: str,
     result: dict[str, Any],
     depth: int = 0,
-    max_depth: int = 100,
+    max_depth: int = 0,
 ) -> None:
     """Recursively flatten a nested dict into *result*."""
     if depth > max_depth:

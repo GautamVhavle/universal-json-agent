@@ -65,23 +65,28 @@ def register(mcp: FastMCP, store: JSONStore) -> dict:
         pattern: str,
         path: str = "",
         case_sensitive: bool = False,
+        max_depth: int | None = None,
     ) -> str:
         """Recursively search all string values for a substring or regex pattern.
 
         Returns the paths and values of every match found. Useful for finding
         where a specific term appears anywhere in a large JSON document.
+        Walks as deep as Python allows unless max_depth is set.
 
         Args:
             alias: The alias of the loaded document.
             pattern: A substring or regex pattern to search for.
             path: Optional starting path to narrow the search scope.
             case_sensitive: Whether matching is case-sensitive (default False).
+            max_depth: Stop after this many nested levels. Omit to walk the full safe depth.
 
         Returns:
             A list of matching paths and their string values.
         """
         try:
-            return query_tools.search_text(store, alias, pattern, path, case_sensitive)
+            return query_tools.search_text(
+                store, alias, pattern, path, case_sensitive, max_depth
+            )
         except (KeyError, ValueError, TypeError, IndexError) as exc:
             return f"Error: {exc}"
 

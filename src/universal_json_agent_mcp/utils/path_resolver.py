@@ -12,11 +12,35 @@ from __future__ import annotations
 
 from functools import lru_cache
 import re
+import sys
 from typing import Any
+
+# Frames we leave unused so a deep walk cannot raise RecursionError.
+_RECURSION_MARGIN = 50
 
 
 # Matches bracket indices like [0], [12]
 _BRACKET_INDEX_RE = re.compile(r"\[(\d+)\]")
+
+
+def walk_limit(max_depth: int | None = None) -> int:
+    """How many nested levels a recursive walk may descend.
+
+    The default is the deepest walk this process can make without crashing.
+    Pass *max_depth* to stop sooner. A value past the interpreter limit raises
+    ValueError instead of being silently cut to 100.
+    """
+    ceiling = max(1, sys.getrecursionlimit() - _RECURSION_MARGIN)
+    if max_depth is None:
+        return ceiling
+    if max_depth < 1:
+        raise ValueError(f"max_depth must be at least 1. The highest safe value is {ceiling}.")
+    if max_depth > ceiling:
+        raise ValueError(
+            f"max_depth {max_depth} is deeper than Python can walk safely ({ceiling}). "
+            f"Omit max_depth to use {ceiling}, or pass that value explicitly."
+        )
+    return max_depth
 
 
 def resolve_path(data: Any, path: str) -> Any:

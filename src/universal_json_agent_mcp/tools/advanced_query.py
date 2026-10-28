@@ -13,7 +13,7 @@ from typing import Any
 
 from universal_json_agent_mcp.store import JSONStore
 from universal_json_agent_mcp.utils.operators import FILTER_OPERATORS, VALID_OPERATOR_NAMES, skip_note
-from universal_json_agent_mcp.utils.path_resolver import resolve_path
+from universal_json_agent_mcp.utils.path_resolver import resolve_path, walk_limit
 from universal_json_agent_mcp.utils.truncation import truncate_list, truncate_value
 
 
@@ -123,6 +123,7 @@ def compare(
     alias_b: str | None = None,
     path_a: str = "",
     path_b: str = "",
+    max_depth: int | None = None,
 ) -> str:
     """
     Compare two JSON values and report their differences.
@@ -139,11 +140,13 @@ def compare(
                  (compare within same document).
         path_a: Dot-notation path for the first value.
         path_b: Dot-notation path for the second value.
+        max_depth: Levels to descend. Omit it to walk as deep as Python allows.
 
     Returns:
         A structured diff report.
     """
     alias_b = alias_b or alias_a
+    limit = walk_limit(max_depth)
 
     data_a = store.get(alias_a)
     data_b = store.get(alias_b)
@@ -151,7 +154,7 @@ def compare(
     val_b = resolve_path(data_b, path_b)
 
     diffs: list[str] = []
-    _diff_recursive(val_a, val_b, path="$", diffs=diffs, max_diffs=100, depth=0)
+    _diff_recursive(val_a, val_b, path="$", diffs=diffs, max_diffs=100, depth=0, max_depth=limit)
 
     if not diffs:
         return "No differences found."
@@ -174,7 +177,7 @@ def _diff_recursive(
     diffs: list[str],
     max_diffs: int,
     depth: int = 0,
-    max_depth: int = 100,
+    max_depth: int = 0,
 ) -> None:
     """Walk two values and record differences into *diffs*."""
     if len(diffs) >= max_diffs:

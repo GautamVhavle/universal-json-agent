@@ -420,12 +420,21 @@ class TestFlattenListMixed:
         assert "items[1]" in result
         assert "items[2].b" in result
 
-    def test_flatten_depth_limit(self, store: JSONStore) -> None:
+    def test_flatten_walks_past_100_levels(self, store: JSONStore) -> None:
         node: object = {"leaf": 1}
         for _ in range(105):
             node = {"n": node}
         s = _load_data(store, node)
         result = flatten(s, "d")
+        assert "leaf" in result
+        assert "max depth reached" not in result
+
+    def test_flatten_respects_max_depth(self, store: JSONStore) -> None:
+        node: object = {"leaf": 1}
+        for _ in range(10):
+            node = {"n": node}
+        s = _load_data(store, node)
+        result = flatten(s, "d", max_depth=2)
         assert "max depth reached" in result
         assert "leaf" not in result
 

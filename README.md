@@ -24,7 +24,7 @@
 &nbsp;
 [![CI](https://img.shields.io/github/actions/workflow/status/GautamVhavle/universal-json-agent/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/GautamVhavle/universal-json-agent/actions/workflows/ci.yml)
 &nbsp;
-[![Tests](https://img.shields.io/badge/tests-499%20passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)]()
+[![Tests](https://img.shields.io/badge/tests-503%20passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)]()
 
 <br />
 
@@ -280,7 +280,7 @@ curl -X POST http://localhost:8000/query \
 git clone https://github.com/GautamVhavle/universal-json-agent.git
 cd universal-json-agent
 uv sync --extra dev
-uv run pytest                            # 499 tests
+uv run pytest                            # 503 tests
 ```
 
 <details>
